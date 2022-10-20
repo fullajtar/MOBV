@@ -32,7 +32,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Email :"
+        android:text="Restaurant Name :"
         android:id="@+id/tv2"
         android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@id/tv1"
@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:textColor="@color/black"
-        android:id="@+id/tv_email"
+        android:id="@+id/tv_restaurantName"
         app:layout_constraintLeft_toRightOf="@id/tv2"
         app:layout_constraintTop_toTopOf="@id/tv2"
         android:layout_marginStart="20dp"
@@ -55,7 +55,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Password :"
+        android:text="Latitude :"
         android:id="@+id/tv3"
         android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@id/tv2"
@@ -69,9 +69,32 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:textColor="@color/black"
-        android:id="@+id/tv_password"
+        android:id="@+id/tv_latitude"
         app:layout_constraintLeft_toRightOf="@id/tv3"
         app:layout_constraintTop_toTopOf="@id/tv3"
+        android:layout_marginStart="20dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Longitude :"
+        android:id="@+id/tv4"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/tv3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="30dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:id="@+id/tv_longitude"
+        app:layout_constraintLeft_toRightOf="@id/tv4"
+        app:layout_constraintTop_toTopOf="@id/tv4"
         android:layout_marginStart="20dp"
         />
 

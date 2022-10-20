@@ -4,9 +4,10 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class User(
+data class Form(
     val name : String ="",
-    val email : String= "",
-    val password : String =""
+    val restaurantName : String= "",
+    val latitude : Number = 0,
+    val longitude : Number = 0
 
 ) : Parcelable

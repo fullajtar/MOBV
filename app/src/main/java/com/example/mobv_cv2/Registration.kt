@@ -24,17 +24,18 @@ class Registration : Fragment() {
         // call onClick on the SendButton
         binding.buttonSend.setOnClickListener {
             val name = binding.etName.text.toString()
-            val email = binding.etEmail.text.toString()
-            val password = binding.etPassword.text.toString()
+            val email = binding.etRestaurantName.text.toString()
+            val password = binding.etLatitude.text.toString().toFloat()
+            val longitude = binding.etLongitude.text.toString().toFloat()
 
             // create user object and pass the
             // required arguments
             // that is name, email,and password
-            val user = User(name,email, password)
+            val form = Form(name,email, password, longitude)
 
             // create an action and pass the required user object to it
             // If you can not find the RegistrationDirection try to "Build project"
-            val action = RegistrationDirections.actionRegistrationToDetails(user)
+            val action = RegistrationDirections.actionRegistrationToDetails(form)
 
             // this will navigate the current fragment i.e
             // Registration to the Detail fragment

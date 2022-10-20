@@ -22,8 +22,8 @@
         android:label="fragment_details"
         tools:layout="@layout/fragment_detail" >
         <argument
-            android:name="user"
-            app:argType="com.example.mobv_cv2.User" />
+            android:name="form"
+            app:argType="com.example.mobv_cv2.Form" />
     </fragment>
 
 </navigation>
