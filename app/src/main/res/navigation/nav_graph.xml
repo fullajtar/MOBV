@@ -13,11 +13,14 @@
         tools:layout="@layout/fragment_registration" >
         <action
             android:id="@+id/action_registration_to_details"
-            app:destination="@id/details" />
+            app:destination="@id/detail" />
+        <action
+            android:id="@+id/action_registration_to_registration"
+            app:destination="@id/registration" />
     </fragment>
 
     <fragment
-        android:id="@+id/details"
+        android:id="@+id/detail"
         android:name="com.example.mobv_cv2.Detail"
         android:label="fragment_details"
         tools:layout="@layout/fragment_detail" >

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 
 import androidx.navigation.fragment.findNavController
 import com.example.mobv_cv2.databinding.FragmentRegistrationBinding
@@ -24,24 +25,37 @@ class Registration : Fragment() {
         // call onClick on the SendButton
         binding.buttonSend.setOnClickListener {
             val name = binding.etName.text.toString()
-            val email = binding.etRestaurantName.text.toString()
-            val password = binding.etLatitude.text.toString().toFloat()
-            val longitude = binding.etLongitude.text.toString().toFloat()
+            val restaurantName = binding.etRestaurantName.text.toString()
 
-            // create user object and pass the
-            // required arguments
-            // that is name, email,and password
-            val form = Form(name,email, password, longitude)
+            if (binding.etLatitude.text.toString().isEmpty() or
+                binding.etLongitude.text.toString().isEmpty() or
+                binding.etRestaurantName.text.toString().isEmpty() or
+                binding.etName.text.toString().isEmpty()
+//                binding.etLatitude.text.toString().equals('.') or
+//                binding.etLongitude.text.toString().equals('.')
+                ) {
 
-            // create an action and pass the required user object to it
-            // If you can not find the RegistrationDirection try to "Build project"
-            val action = RegistrationDirections.actionRegistrationToDetails(form)
+                Toast.makeText(activity,"All fields are required!",Toast.LENGTH_SHORT).show()
+                findNavController().navigate(
+                    RegistrationDirections.actionRegistrationToRegistration()
+                )
+            }
+            else{
+                val latitude = binding.etLatitude.text.toString().toFloat()
+                val longitude = binding.etLongitude.text.toString().toFloat()
 
-            // this will navigate the current fragment i.e
-            // Registration to the Detail fragment
-            findNavController().navigate(
-                action
-            )
+                // create an action and pass the required user object to it
+                // If you can not find the RegistrationDirection try to "Build project"
+                val form = Form(name,restaurantName, latitude, longitude)
+
+                findNavController().navigate(
+                    // create an action and pass the required user object to it
+                    // If you can not find the RegistrationDirection try to "Build project"
+                    // this will navigate the current fragment i.e
+                    // Registration to the Detail fragment
+                    RegistrationDirections.actionRegistrationToDetails(form)
+                )
+            }
         }
         return view
     }
