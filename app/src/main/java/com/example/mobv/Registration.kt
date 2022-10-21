@@ -9,8 +9,6 @@ import android.widget.Toast
 
 import androidx.navigation.fragment.findNavController
 import com.example.mobv.databinding.FragmentRegistrationBinding
-import com.example.mobv_cv2.databinding.FragmentRegistrationBinding
-
 
 class Registration : Fragment() {
 

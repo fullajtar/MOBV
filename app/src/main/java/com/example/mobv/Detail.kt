@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.example.mobv.databinding.FragmentDetailBinding
-import com.example.mobv_cv2.databinding.FragmentDetailBinding
 
 
 class Detail : Fragment() {
