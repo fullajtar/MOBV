@@ -1,4 +1,4 @@
-package com.example.mobv_cv2
+package com.example.mobv
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 
 import androidx.navigation.fragment.findNavController
+import com.example.mobv.databinding.FragmentRegistrationBinding
 import com.example.mobv_cv2.databinding.FragmentRegistrationBinding
+
 
 class Registration : Fragment() {
 

@@ -1,4 +1,4 @@
-package com.example.mobv_cv2
+package com.example.mobv
 
 import android.content.Intent
 import android.net.Uri
@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import com.example.mobv.databinding.FragmentDetailBinding
 import com.example.mobv_cv2.databinding.FragmentDetailBinding
 
 

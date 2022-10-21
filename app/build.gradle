@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.mobv_cv2'
+    namespace 'com.example.mobv'
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.example.mobv_cv2"
+        applicationId "com.example.mobv"
         minSdk 21
         targetSdk 32
         versionCode 1

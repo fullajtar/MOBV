@@ -1,4 +1,4 @@
-package com.example.mobv_cv2
+package com.example.mobv
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

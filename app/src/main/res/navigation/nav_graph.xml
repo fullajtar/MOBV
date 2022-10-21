@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/registration"
-        android:name="com.example.mobv_cv2.Registration"
+        android:name="com.example.mobv.Registration"
         android:label="fragment_registration"
         tools:layout="@layout/fragment_registration" >
         <action
@@ -21,12 +21,12 @@
 
     <fragment
         android:id="@+id/detail"
-        android:name="com.example.mobv_cv2.Detail"
+        android:name="com.example.mobv.Detail"
         android:label="fragment_details"
         tools:layout="@layout/fragment_detail" >
         <argument
             android:name="form"
-            app:argType="com.example.mobv_cv2.Form" />
+            app:argType="com.example.mobv.Form" />
     </fragment>
 
 </navigation>
