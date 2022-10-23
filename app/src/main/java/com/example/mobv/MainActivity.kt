@@ -1,8 +1,7 @@
 package com.example.mobv
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.mobv.R
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

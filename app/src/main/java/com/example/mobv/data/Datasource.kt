@@ -1,4 +1,7 @@
-package com.example.mobv
+package com.example.mobv.data
+
+import com.example.mobv.R
+import com.example.mobv.model.Affirmation
 
 class Datasource {
     fun loadAffirmations(): List<Affirmation> {

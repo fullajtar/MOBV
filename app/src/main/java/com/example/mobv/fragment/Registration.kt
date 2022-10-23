@@ -1,20 +1,18 @@
-package com.example.mobv
+package com.example.mobv.fragment
+
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
-import kotlinx.android.synthetic.main.fragment_registration.textView
-
-
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.mobv.adapter.ItemAdapter
+import com.example.mobv.data.Datasource
 import com.example.mobv.databinding.FragmentRegistrationBinding
+import com.example.mobv.model.Form
 import kotlinx.android.synthetic.main.fragment_registration.view.*
-import android.content.Context
-import android.app.Application
 
 
 class Registration : Fragment() {

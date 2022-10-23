@@ -1,4 +1,4 @@
-package com.example.mobv
+package com.example.mobv.fragment
 
 import android.content.Intent
 import android.net.Uri
