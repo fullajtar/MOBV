@@ -5,10 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
+import kotlinx.android.synthetic.main.fragment_registration.textView
+
 
 import androidx.navigation.fragment.findNavController
 import com.example.mobv.databinding.FragmentRegistrationBinding
+import kotlinx.android.synthetic.main.fragment_registration.view.*
+import android.content.Context
+import android.app.Application
+
 
 class Registration : Fragment() {
 
@@ -21,6 +28,18 @@ class Registration : Fragment() {
     ): View {
         _binding = FragmentRegistrationBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        // Initialize data.
+        val myDataset = Datasource().loadAffirmations()
+
+        //find textView and insert number of elements of array
+        binding.textView.text = Datasource().loadAffirmations().size.toString()
+
+        binding.recyclerView.recycler_view.adapter = ItemAdapter(requireContext(), myDataset)
+
+        // Use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        binding.recyclerView.recycler_view.setHasFixedSize(true)
 
         // call onClick on the SendButton
         binding.buttonSend.setOnClickListener {
