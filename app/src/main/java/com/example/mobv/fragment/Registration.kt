@@ -45,7 +45,7 @@ class Registration : Fragment() {
 //        binding.textView.text = otherList.toString()
 
 //        pass obj to Adapter for Recycler
-        binding.recyclerView.recycler_view.adapter = PubAdapter(requireContext(), otherList.elements!! )
+        binding.recyclerView.recycler_view.adapter = PubAdapter(requireContext(), otherList.elements!! ,findNavController())
 
         // Use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
