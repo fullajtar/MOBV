@@ -7,15 +7,15 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobv.R
-import com.example.mobv.model.Affirmation
+import com.example.mobv.model.Pub
 
 /**
- * Adapter for the [RecyclerView] in [MainActivity]. Displays [Affirmation] data object.
+ * Adapter for the [RecyclerView] in [RegistrationFragment]. Displays [Pub] data object.
  */
-class ItemAdapter(
+class PubAdapter (
     private val context: Context,
-    private val dataset: List<Affirmation>
-) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
+    private val dataset: List<Pub>
+) : RecyclerView.Adapter<PubAdapter.ItemViewHolder>() {
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -41,7 +41,7 @@ class ItemAdapter(
      */
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = dataset[position]
-        holder.textView.text =  context.resources.getString(item.stringResourceId)
+        holder.textView.text =  item.tags!!.name.toString()
     }
 
     /**
