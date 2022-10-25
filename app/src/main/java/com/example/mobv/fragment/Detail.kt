@@ -7,8 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.navArgs
 import com.example.mobv.databinding.FragmentDetailBinding
+import androidx.navigation.fragment.findNavController
+import com.example.mobv.R
+import com.example.mobv.model.PubsSingleton
+import com.example.mobv.model.PubsSingleton.pubs
 
 
 class Detail : Fragment() {
@@ -49,6 +55,14 @@ class Detail : Fragment() {
             mapIntent.resolveActivity(packageManager)?.let {
                 startActivity(mapIntent)
             }
+        }
+
+        binding.detailRemoveButton.setOnClickListener {
+            PubsSingleton.pubs.elements!!.remove(pub)
+            findNavController().navigate(
+                DetailDirections.actionDetailToRegistration()
+            )
+
         }
 
         return view

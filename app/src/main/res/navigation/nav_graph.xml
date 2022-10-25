@@ -27,6 +27,9 @@
         <argument
             android:name="pub"
             app:argType="com.example.mobv.model.Pub" />
+        <action
+            android:id="@+id/action_detail_to_registration"
+            app:destination="@id/registration" />
     </fragment>
 
 </navigation>
