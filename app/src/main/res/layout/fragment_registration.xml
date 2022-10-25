@@ -7,14 +7,27 @@
     android:layout_height="match_parent"
     tools:context=".fragment.Registration">
 
+    <Button
+        android:id="@+id/registration_sort_button"
+        android:text="Sort"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="20dp"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constrainedHeight="true"
         android:layout_margin="20dp"
-        app:layoutManager="LinearLayoutManager"
         android:scrollbars="vertical"
+        app:layoutManager="LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/registration_sort_button"
+        app:layout_constraintBottom_toBottomOf="parent"
 
-        />
+        tools:layout_editor_absoluteX="20dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

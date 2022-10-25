@@ -3,8 +3,13 @@ package com.example.mobv.model
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
+object PubsSingleton{
+    lateinit var pubs: Pubs
+}
+
 data class Pubs (
-    var elements: List<Pub>? = null
+    var elements: MutableList<Pub>? = null,
+    var sortBy: String? = null //"ascending" or "descending"
 ){}
 
 @Parcelize

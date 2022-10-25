@@ -7,11 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.navigation.NavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobv.R
 import com.example.mobv.fragment.RegistrationDirections
-import com.example.mobv.model.Form
 import com.example.mobv.model.Pub
 import kotlinx.android.synthetic.main.fragment_registration.view.*
 import kotlinx.android.synthetic.main.list_item.view.*
