@@ -19,6 +19,8 @@ data class Tags(
 //    var opening_hourscovid19: String? = null,
     var website: String? = null,
     var phone: String? = null
+
+
 ): Parcelable
 
 @Parcelize

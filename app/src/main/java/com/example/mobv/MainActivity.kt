@@ -2,8 +2,6 @@ package com.example.mobv
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
-import com.example.mobv.databinding.FragmentRegistrationBinding
 import com.example.mobv.model.Pubs
 import com.example.mobv.model.PubsSingleton
 import com.google.gson.Gson

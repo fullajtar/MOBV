@@ -62,7 +62,6 @@ class Detail : Fragment() {
             findNavController().navigate(
                 DetailDirections.actionDetailToRegistration()
             )
-
         }
 
         return view
