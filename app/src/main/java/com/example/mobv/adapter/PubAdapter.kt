@@ -53,7 +53,7 @@ class PubAdapter (
         holder.textView.setOnClickListener {
             (holder.textView.setTextColor(Color.GREEN))
             findNavController.navigate(
-                RegistrationDirections.actionRegistrationToDetails(Form("name", item.tags!!.name.toString(), 0.1, 1.2))
+                RegistrationDirections.actionRegistrationToDetails( item )
             )
         } // click event
 

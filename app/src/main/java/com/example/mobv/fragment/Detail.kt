@@ -27,13 +27,16 @@ class Detail : Fragment() {
         val view = binding.root
 
         // Receive the arguments in a variable
-        val formDetails = args.form
+        val pub = args.pub
 
         // set the values to respective textViews
-        binding.tvName.text = formDetails.name
-        binding.tvRestaurantName.text = formDetails.restaurantName
-        val latitudeString = formDetails.latitude.toString()
-        val longitudeString = formDetails.longitude.toString()
+        binding.tvRestaurantName.text = pub.tags!!.name.toString()
+        binding.detailWebpageValue.text = pub.tags!!.website.toString()
+        binding.detailPhoneValue.text = pub.tags!!.phone.toString()
+        binding.detailOpenhoursValue.text = pub.tags!!.opening_hours.toString()
+
+        val latitudeString = pub.lat.toString()
+        val longitudeString = pub.lon.toString()
 
         binding.tvLatitude.text = latitudeString
         binding.tvLongitude.text = longitudeString

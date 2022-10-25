@@ -10,32 +10,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/name"
-        android:id="@+id/tv1"
-        android:textSize="20sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="50dp"
-        android:layout_marginStart="30dp"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        android:id="@+id/tv_name"
-        app:layout_constraintLeft_toRightOf="@id/tv1"
-        app:layout_constraintTop_toTopOf="@id/tv1"
-        android:layout_marginStart="20dp"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="@string/restaurant_name"
         android:id="@+id/tv2"
         android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@id/tv1"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="20dp"
         android:layout_marginStart="30dp"
@@ -52,13 +30,80 @@
         android:layout_marginStart="20dp"
         />
 
+<!--WEBPAGE-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Webpage:"
+        android:id="@+id/detail_webpage"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/tv2"
+        android:layout_marginStart="30dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/detail_webpage_value"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toRightOf="@id/detail_webpage"
+        app:layout_constraintTop_toTopOf="@id/detail_webpage"
+        android:layout_marginStart="20dp"
+        />
+
+<!--    PHONE NUMBER-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phone number:"
+        android:id="@+id/detail_phone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/detail_webpage"
+        android:layout_marginStart="30dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/detail_phone_value"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toRightOf="@id/detail_phone"
+        app:layout_constraintTop_toTopOf="@id/detail_phone"
+        android:layout_marginStart="20dp"
+        />
+
+<!--    OPENING HOURS-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Opening Hours:"
+        android:id="@+id/detail_openhours"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/detail_phone"
+        android:layout_marginStart="30dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/detail_openhours_value"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toRightOf="@id/detail_openhours"
+        app:layout_constraintTop_toTopOf="@id/detail_openhours"
+        android:layout_marginStart="20dp"
+        />
+
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/latitude"
         android:id="@+id/tv3"
         android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@id/tv2"
+        app:layout_constraintTop_toBottomOf="@id/detail_openhours"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="20dp"
         android:layout_marginStart="30dp"

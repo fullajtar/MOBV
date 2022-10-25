@@ -25,8 +25,8 @@
         android:label="fragment_details"
         tools:layout="@layout/fragment_detail" >
         <argument
-            android:name="form"
-            app:argType="com.example.mobv.model.Form" />
+            android:name="pub"
+            app:argType="com.example.mobv.model.Pub" />
     </fragment>
 
 </navigation>
