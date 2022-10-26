@@ -25,7 +25,7 @@ data class Tags(
 
 @Parcelize
 data class Pub (
-    //    val name: String? = null
+    val id: Number? = null,
     var lat: Number? = null,
     var lon: Number? = null,
     var tags: Tags? = null

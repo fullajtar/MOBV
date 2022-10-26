@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_registration_to_registration"
             app:destination="@id/registration" />
+        <action
+            android:id="@+id/action_registration_to_newPub"
+            app:destination="@id/newPub" />
     </fragment>
 
     <fragment
@@ -29,6 +32,16 @@
             app:argType="com.example.mobv.model.Pub" />
         <action
             android:id="@+id/action_detail_to_registration"
+            app:destination="@id/registration" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/newPub"
+        android:name="com.example.mobv.fragment.NewPub"
+        android:label="fragment_new_pub"
+        tools:layout="@layout/fragment_new_pub" >
+        <action
+            android:id="@+id/action_newPub_to_registration"
             app:destination="@id/registration" />
     </fragment>
 

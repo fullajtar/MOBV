@@ -49,6 +49,14 @@ class Registration : Fragment() {
             findNavController().navigate(
                 RegistrationDirections.actionRegistrationToRegistration()
             )
+
+
+        }
+
+        binding.buttonRegistrationAdd.setOnClickListener{
+            findNavController().navigate(
+                RegistrationDirections.actionRegistrationToNewPub()
+            )
         }
 //        pass obj to Adapter for Recycler
         binding.recyclerView.recycler_view.adapter = PubAdapter(requireContext(), pubs.elements!! ,findNavController())
