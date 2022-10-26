@@ -9,10 +9,10 @@ import android.widget.TextView
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobv.R
-import com.example.mobv.fragment.RegistrationDirections
+import com.example.mobv.fragment.ListPubDirections
 import com.example.mobv.model.Pub
-import kotlinx.android.synthetic.main.fragment_registration.view.*
-import kotlinx.android.synthetic.main.list_item.view.*
+import kotlinx.android.synthetic.main.fragment_list_pub.view.*
+import kotlinx.android.synthetic.main.list_item_pub.view.*
 
 /**
  * Adapter for the [RecyclerView] in [RegistrationFragment]. Displays [Pub] data object.
@@ -28,7 +28,7 @@ class PubAdapter (
     // you provide access to all the views for a data item in a view holder.
     // Each data item is just an Affirmation object.
     class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-        val textView: TextView = view.findViewById(R.id.item_title)
+        val textView: TextView = view.findViewById(R.id.listItemPub_name)
     }
 
     /**
@@ -37,7 +37,7 @@ class PubAdapter (
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         // create a new view
         val adapterLayout = LayoutInflater.from(parent.context)
-            .inflate(R.layout.list_item, parent, false)
+            .inflate(R.layout.list_item_pub, parent, false)
 
         return ItemViewHolder(adapterLayout)
     }
@@ -51,7 +51,7 @@ class PubAdapter (
         holder.textView.setOnClickListener {
             (holder.textView.setTextColor(Color.GREEN))
             findNavController.navigate(
-                RegistrationDirections.actionRegistrationToDetails( item )
+                ListPubDirections.actionRegistrationToDetails( item )
             )
         } // click event
 

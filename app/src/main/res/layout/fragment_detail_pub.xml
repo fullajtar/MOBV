@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.Detail">
+    tools:context=".fragment.DetailPub">
 
     <TextView
+        android:id="@+id/detailPub_pubName"
+        android:text="@string/restaurant_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/restaurant_name"
-        android:id="@+id/tv2"
         android:textSize="20sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -20,126 +20,129 @@
         />
 
     <TextView
+        android:id="@+id/detailPub_pubNameValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:textColor="@color/black"
-        android:id="@+id/tv_restaurantName"
-        app:layout_constraintLeft_toRightOf="@id/tv2"
-        app:layout_constraintTop_toTopOf="@id/tv2"
+        app:layout_constraintLeft_toRightOf="@id/detailPub_pubName"
+        app:layout_constraintTop_toTopOf="@id/detailPub_pubName"
         android:layout_marginStart="20dp"
         />
 
 <!--WEBPAGE-->
     <TextView
+        android:id="@+id/detailPub_website"
+        android:text="Website:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Webpage:"
-        android:id="@+id/detail_webpage"
         app:layout_constraintLeft_toLeftOf="parent"
         android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@id/tv2"
+        app:layout_constraintTop_toBottomOf="@id/detailPub_pubName"
+        android:layout_marginTop="20dp"
         android:layout_marginStart="30dp"
         />
 
     <TextView
+        android:id="@+id/detailPub_websiteValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/detail_webpage_value"
         android:textSize="20sp"
-        app:layout_constraintLeft_toRightOf="@id/detail_webpage"
-        app:layout_constraintTop_toTopOf="@id/detail_webpage"
+        app:layout_constraintLeft_toRightOf="@id/detailPub_website"
+        app:layout_constraintTop_toTopOf="@id/detailPub_website"
         android:layout_marginStart="20dp"
         />
 
 <!--    PHONE NUMBER-->
     <TextView
+        android:id="@+id/detailPub_phoneNumber"
+        android:text="Phone number:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Phone number:"
-        android:id="@+id/detail_phone"
         app:layout_constraintLeft_toLeftOf="parent"
         android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@id/detail_webpage"
+        app:layout_constraintTop_toBottomOf="@id/detailPub_website"
+        android:layout_marginTop="20dp"
         android:layout_marginStart="30dp"
         />
 
     <TextView
+        android:id="@+id/detailPub_phoneNumberValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/detail_phone_value"
         android:textSize="20sp"
-        app:layout_constraintLeft_toRightOf="@id/detail_phone"
-        app:layout_constraintTop_toTopOf="@id/detail_phone"
+        app:layout_constraintLeft_toRightOf="@id/detailPub_phoneNumber"
+        app:layout_constraintTop_toTopOf="@id/detailPub_phoneNumber"
         android:layout_marginStart="20dp"
         />
 
 <!--    OPENING HOURS-->
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/detailPub_openingHours"
         android:text="Opening Hours:"
-        android:id="@+id/detail_openhours"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@id/detail_phone"
+        app:layout_constraintTop_toBottomOf="@id/detailPub_phoneNumber"
+        android:layout_marginTop="20dp"
         android:layout_marginStart="30dp"
         />
 
     <TextView
+        android:id="@+id/detailPub_openingHoursValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/detail_openhours_value"
         android:textSize="20sp"
-        app:layout_constraintLeft_toRightOf="@id/detail_openhours"
-        app:layout_constraintTop_toTopOf="@id/detail_openhours"
+        app:layout_constraintLeft_toRightOf="@id/detailPub_openingHours"
+        app:layout_constraintTop_toTopOf="@id/detailPub_openingHours"
         android:layout_marginStart="20dp"
         />
 
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/detailPub_latitude"
         android:text="@string/latitude"
-        android:id="@+id/tv3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@id/detail_openhours"
+        app:layout_constraintTop_toBottomOf="@id/detailPub_openingHours"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="20dp"
         android:layout_marginStart="30dp"
         />
 
     <TextView
+        android:id="@+id/detailPub_latitudeValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:textColor="@color/black"
-        android:id="@+id/tv_latitude"
-        app:layout_constraintLeft_toRightOf="@id/tv3"
-        app:layout_constraintTop_toTopOf="@id/tv3"
+        app:layout_constraintLeft_toRightOf="@id/detailPub_latitude"
+        app:layout_constraintTop_toTopOf="@id/detailPub_latitude"
         android:layout_marginStart="20dp"
         />
 
     <TextView
+        android:id="@+id/detailPub_longitude"
+        android:text="@string/longitude"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/longitude"
-        android:id="@+id/tv4"
         android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@id/tv3"
+        app:layout_constraintTop_toBottomOf="@id/detailPub_latitude"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="20dp"
         android:layout_marginStart="30dp"
         />
 
     <TextView
+        android:id="@+id/detailPub_longitudeValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:textColor="@color/black"
-        android:id="@+id/tv_longitude"
-        app:layout_constraintLeft_toRightOf="@id/tv4"
-        app:layout_constraintTop_toTopOf="@id/tv4"
+        app:layout_constraintLeft_toRightOf="@id/detailPub_longitude"
+        app:layout_constraintTop_toTopOf="@id/detailPub_longitude"
         android:layout_marginStart="20dp"
         />
 
@@ -150,7 +153,7 @@
         app:layout_constraintBottom_toTopOf="@+id/button_showMap"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_longitude"
+        app:layout_constraintTop_toBottomOf="@+id/detailPub_longitude"
         app:layout_constraintVertical_bias="0.333"
         app:lottie_autoPlay="true"
         app:lottie_loop="false"

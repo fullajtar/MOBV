@@ -7,20 +7,20 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.mobv.adapter.PubAdapter
-import com.example.mobv.databinding.FragmentRegistrationBinding
+import com.example.mobv.databinding.FragmentListPubBinding
 import com.example.mobv.model.PubsSingleton
-import kotlinx.android.synthetic.main.fragment_registration.view.*
+import kotlinx.android.synthetic.main.fragment_list_pub.view.*
 
-class Registration : Fragment() {
+class ListPub : Fragment() {
 
-    private var _binding: FragmentRegistrationBinding? = null
+    private var _binding: FragmentListPubBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentRegistrationBinding.inflate(inflater, container, false)
+        _binding = FragmentListPubBinding.inflate(inflater, container, false)
         val view = binding.root
         val pubs = PubsSingleton.pubs
         if (pubs.sortBy != null){
@@ -35,7 +35,7 @@ class Registration : Fragment() {
             }
         }
 
-        binding.registrationSortButton.setOnClickListener{
+        binding.listPubButtonSort.setOnClickListener{
             if (pubs.sortBy == null){
                 pubs.sortBy = "ascending"
             }
@@ -47,23 +47,23 @@ class Registration : Fragment() {
             }
 
             findNavController().navigate(
-                RegistrationDirections.actionRegistrationToRegistration()
+                ListPubDirections.actionRegistrationToRegistration()
             )
 
 
         }
 
-        binding.buttonRegistrationAdd.setOnClickListener{
+        binding.listPubButtonAdd.setOnClickListener{
             findNavController().navigate(
-                RegistrationDirections.actionRegistrationToNewPub()
+                ListPubDirections.actionRegistrationToNewPub()
             )
         }
 //        pass obj to Adapter for Recycler
-        binding.recyclerView.recycler_view.adapter = PubAdapter(requireContext(), pubs.elements!! ,findNavController())
+        binding.ListPubRecyclerView.ListPub_recyclerView.adapter = PubAdapter(requireContext(), pubs.elements!! ,findNavController())
 
         // Use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
-        binding.recyclerView.recycler_view.setHasFixedSize(true)
+        binding.ListPubRecyclerView.ListPub_recyclerView.setHasFixedSize(true)
 
         return view
     }

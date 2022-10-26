@@ -7,8 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-import com.example.mobv.R
-import com.example.mobv.databinding.FragmentDetailBinding
 import com.example.mobv.databinding.FragmentNewPubBinding
 import com.example.mobv.model.Pub
 import com.example.mobv.model.PubsSingleton
@@ -31,12 +29,12 @@ class NewPub : Fragment() {
         _binding = FragmentNewPubBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        binding.buttonSend.setOnClickListener {
+        binding.newPubButtonSend.setOnClickListener {
             try {
                 val tags =  Tags(
                     binding.newPubPubName.text.toString(),
                     binding.newPubOpeningHours.text.toString(),
-                    binding.newPubWebpage.text.toString(),
+                    binding.newPubWebsite.text.toString(),
                     binding.newPubPhoneNumber.text.toString()
                 )
                 val pub =   Pub(

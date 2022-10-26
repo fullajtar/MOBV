@@ -7,45 +7,41 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.navArgs
-import com.example.mobv.databinding.FragmentDetailBinding
+import com.example.mobv.databinding.FragmentDetailPubBinding
 import androidx.navigation.fragment.findNavController
-import com.example.mobv.R
 import com.example.mobv.model.PubsSingleton
-import com.example.mobv.model.PubsSingleton.pubs
 
 
-class Detail : Fragment() {
+class DetailPub : Fragment() {
 
-    private var _binding: FragmentDetailBinding? = null
+    private var _binding: FragmentDetailPubBinding? = null
     private val binding get() = _binding!!
 
     // get the arguments from the Registration fragment
-    private val args : DetailArgs by navArgs()
+    private val args : DetailPubArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDetailBinding.inflate(inflater, container, false)
+        _binding = FragmentDetailPubBinding.inflate(inflater, container, false)
         val view = binding.root
 
         // Receive the arguments in a variable
         val pub = args.pub
 
         // set the values to respective textViews
-        binding.tvRestaurantName.text = pub.tags!!.name.toString()
-        binding.detailWebpageValue.text = pub.tags!!.website.toString()
-        binding.detailPhoneValue.text = pub.tags!!.phone.toString()
-        binding.detailOpenhoursValue.text = pub.tags!!.opening_hours.toString()
+        binding.detailPubPubNameValue.text = pub.tags!!.name.toString()
+        binding.detailPubWebsiteValue.text = pub.tags!!.website.toString()
+        binding.detailPubPhoneNumberValue.text = pub.tags!!.phone.toString()
+        binding.detailPubOpeningHoursValue.text = pub.tags!!.opening_hours.toString()
 
         val latitudeString = pub.lat.toString()
         val longitudeString = pub.lon.toString()
 
-        binding.tvLatitude.text = latitudeString
-        binding.tvLongitude.text = longitudeString
+        binding.detailPubLatitudeValue.text = latitudeString
+        binding.detailPubLongitudeValue.text = longitudeString
 
         binding.buttonShowMap.setOnClickListener{
             val packageManager = requireActivity().packageManager
@@ -60,7 +56,7 @@ class Detail : Fragment() {
         binding.detailRemoveButton.setOnClickListener {
             PubsSingleton.pubs.elements!!.remove(pub)
             findNavController().navigate(
-                DetailDirections.actionDetailToRegistration()
+                DetailPubDirections.actionDetailToRegistration()
             )
         }
 

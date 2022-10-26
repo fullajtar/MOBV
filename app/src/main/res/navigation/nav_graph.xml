@@ -8,9 +8,9 @@
 
     <fragment
         android:id="@+id/registration"
-        android:name="com.example.mobv.fragment.Registration"
+        android:name="com.example.mobv.fragment.ListPub"
         android:label="fragment_registration"
-        tools:layout="@layout/fragment_registration" >
+        tools:layout="@layout/fragment_list_pub" >
         <action
             android:id="@+id/action_registration_to_details"
             app:destination="@id/detail" />
@@ -24,9 +24,9 @@
 
     <fragment
         android:id="@+id/detail"
-        android:name="com.example.mobv.fragment.Detail"
+        android:name="com.example.mobv.fragment.DetailPub"
         android:label="fragment_details"
-        tools:layout="@layout/fragment_detail" >
+        tools:layout="@layout/fragment_detail_pub" >
         <argument
             android:name="pub"
             app:argType="com.example.mobv.model.Pub" />
