@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/registration">
+    app:startDestination="@id/game">
+<!--    app:startDestination="@id/registration">-->
 
     <fragment
         android:id="@+id/registration"
@@ -44,5 +45,10 @@
             android:id="@+id/action_newPub_to_registration"
             app:destination="@id/registration" />
     </fragment>
+    <fragment
+        android:id="@+id/game"
+        android:name="com.example.mobv.fragment.Game"
+        android:label="Game"
+        tools:layout="@layout/fragment_game"/>
 
 </navigation>

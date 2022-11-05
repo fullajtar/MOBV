@@ -22,5 +22,7 @@
     <string name="affirmation8">I have the courage to follow my heart.</string>
     <string name="affirmation9">Things will unfold at precisely the right time.</string>
     <string name="affirmation10">I will be present in all the moments that this day brings.</string>
+    <string name="word_count">WordCount</string>
+    <string name="score">Score</string>
 
 </resources>
