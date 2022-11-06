@@ -6,13 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.mobv.R
 import com.example.mobv.databinding.FragmentGameBinding
-import com.example.mobv.databinding.FragmentListPubBinding
 import com.example.mobv.model.GameViewModel
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.fragment_game.view.*
-import java.lang.System.exit
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
