@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MOBV"
         tools:targetApi="31">
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -26,5 +27,6 @@
                 android:value="" />
         </activity>
     </application>
+
 
 </manifest>
