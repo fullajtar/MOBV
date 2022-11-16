@@ -1,5 +1,9 @@
 package com.example.mobv
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -36,23 +40,51 @@ class MainActivity : AppCompatActivity() {
             AppDatabase.getDatabase(applicationContext).californiaParkDao().getAll()
         }
 
-        val quotesApi = RetrofitHelper.getInstance().create(PubsApi::class.java)
-        // launching a new coroutine
-        GlobalScope.launch {
-//            val result = quotesApi.getQuotes()
-//            if (result != null)
-//            // Checking the results
-//                Log.d("ayush: ", result.body().toString())
+        if (isNetworkAvailable(applicationContext)){
+            val quotesApi = RetrofitHelper.getInstance().create(PubsApi::class.java)
+            // launching a new coroutine
+            GlobalScope.launch {
 
-
-
-            val result = quotesApi.getPubs(BodyApi())
-            if (result != null)
-            // Checking the results
-                Log.d("ayush: ", result.body().toString())
+                val result = quotesApi.getPubs(BodyApi())
+                if (result != null)
+                // Checking the results
+                    Log.d("ayush: ", result.body().toString())
+            }
         }
+        else{
+            Log.d("ayush: ", "net NOT available")
+        }
+
+
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+    }
+
+    fun isNetworkAvailable(context: Context?): Boolean {
+        if (context == null) return false
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            val capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+            if (capabilities != null) {
+                when {
+                    capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> {
+                        return true
+                    }
+                    capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> {
+                        return true
+                    }
+                    capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> {
+                        return true
+                    }
+                }
+            }
+        } else {
+            val activeNetworkInfo = connectivityManager.activeNetworkInfo
+            if (activeNetworkInfo != null && activeNetworkInfo.isConnected) {
+                return true
+            }
+        }
+        return false
     }
 }
