@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mobv.model.Pubs
 import com.example.mobv.model.PubsSingleton
+import com.example.mobv.retrofit.BodyApi
 import com.example.mobv.retrofit.RetrofitHelper
 import com.example.sqlbasics.AppDatabase
 import com.google.gson.Gson
@@ -38,7 +39,14 @@ class MainActivity : AppCompatActivity() {
         val quotesApi = RetrofitHelper.getInstance().create(PubsApi::class.java)
         // launching a new coroutine
         GlobalScope.launch {
-            val result = quotesApi.getQuotes()
+//            val result = quotesApi.getQuotes()
+//            if (result != null)
+//            // Checking the results
+//                Log.d("ayush: ", result.body().toString())
+
+
+
+            val result = quotesApi.getPubs(BodyApi())
             if (result != null)
             // Checking the results
                 Log.d("ayush: ", result.body().toString())
