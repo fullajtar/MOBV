@@ -7,6 +7,7 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.mobv.model.Pubs
 import com.example.mobv.model.PubsSingleton
 import com.example.mobv.retrofit.BodyApi
@@ -17,6 +18,7 @@ import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import com.example.mobv.retrofit.PubsApi
+import com.example.sqlbasics.PubDB
 import retrofit2.create
 
 class MainActivity : AppCompatActivity() {

@@ -25,4 +25,9 @@ interface CaliforniaParkDao {
     fun insertAll(parks: List<CaliforniaPark>)
     @Query("SELECT * FROM park")
     fun getAll(): List<CaliforniaPark>
+
+    @Insert
+    fun insertAllPubsDB(pubsDB: List<PubDB>)
+    @Query("SELECT * FROM pub")
+    fun getAllPubs(): List<PubDB>
 }

@@ -29,3 +29,10 @@ data class CaliforniaPark(
     @ColumnInfo(name = "established") val established: Long,
     @ColumnInfo(name = "type") val type: String
 )
+
+@Entity(tableName = "pub")
+data class PubDB(
+    @PrimaryKey(autoGenerate = true) val id: Int,
+    @ColumnInfo(name = "name") val lon: String,
+    @ColumnInfo(name = "city") val lat: String,
+)
