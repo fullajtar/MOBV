@@ -42,9 +42,10 @@ class MainActivity : AppCompatActivity() {
             var out = AppDatabase.getDatabase(applicationContext).californiaParkDao().getAllPubs()
             Log.d("testingOut: ", out.toString())
 
-            val pub0 = PubDB(1, "100", "100")
-            val pub1 = PubDB(2,"220", "222")
-            AppDatabase.getDatabase(applicationContext).californiaParkDao().insertAllPubsDB(listOf(pub0, pub1))
+            val pub0 = PubDB(3, "50", "100")
+            val pub1 = PubDB(4,"20", "222")
+//            crashing the app, probably beacuse im tryin gto add entries with existing ID
+//            AppDatabase.getDatabase(applicationContext).californiaParkDao().insertAllPubsDB(listOf(pub0, pub1))
 
             out = AppDatabase.getDatabase(applicationContext).californiaParkDao().getAllPubs()
             Log.d("testingOut: ", out.toString())

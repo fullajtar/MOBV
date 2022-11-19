@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/registration">
+    app:startDestination="@id/signUp">
 <!--    app:startDestination="@id/registration">-->
 
     <fragment
@@ -50,5 +50,23 @@
         android:name="com.example.mobv.fragment.Game"
         android:label="Game"
         tools:layout="@layout/fragment_game"/>
+    <fragment
+        android:id="@+id/signUp"
+        android:name="com.example.mobv.fragment.SignUp"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUp_to_signIn"
+            app:destination="@id/signIn" />
+    </fragment>
+    <fragment
+        android:id="@+id/signIn"
+        android:name="com.example.mobv.fragment.SignIn"
+        android:label="fragment_sign_in"
+        tools:layout="@layout/fragment_sign_in" >
+        <action
+            android:id="@+id/action_signIn_to_signUp"
+            app:destination="@id/signUp" />
+    </fragment>
 
 </navigation>
