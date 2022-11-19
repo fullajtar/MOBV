@@ -39,7 +39,16 @@ class MainActivity : AppCompatActivity() {
         PubsSingleton.pubs = pubs
 
         GlobalScope.launch {
-            AppDatabase.getDatabase(applicationContext).californiaParkDao().getAll()
+            var out = AppDatabase.getDatabase(applicationContext).californiaParkDao().getAllPubs()
+            Log.d("testingOut: ", out.toString())
+
+            val pub0 = PubDB(1, "100", "100")
+            val pub1 = PubDB(2,"220", "222")
+            AppDatabase.getDatabase(applicationContext).californiaParkDao().insertAllPubsDB(listOf(pub0, pub1))
+
+            out = AppDatabase.getDatabase(applicationContext).californiaParkDao().getAllPubs()
+            Log.d("testingOut: ", out.toString())
+
         }
 
         if (isNetworkAvailable(applicationContext)){
@@ -50,7 +59,7 @@ class MainActivity : AppCompatActivity() {
                 val result = quotesApi.getPubs(BodyApi())
                 if (result != null)
                 // Checking the results
-                    Log.d("ayush: ", result.body().toString())
+                    Log.d("testingOut: ", result.body().toString())
             }
         }
         else{
