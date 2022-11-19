@@ -42,15 +42,17 @@ class SignIn : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSignInBinding.inflate(inflater, container, false)
-        val view = binding.root
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         binding.buttonSignUp.setOnClickListener{
             findNavController().navigate(
                 SignInDirections.actionSignInToSignUp()
             )
         }
-
-        return view
     }
 
     companion object {
