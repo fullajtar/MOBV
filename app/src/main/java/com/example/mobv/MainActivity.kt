@@ -7,19 +7,17 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.mobv.model.Pubs
 import com.example.mobv.model.PubsSingleton
-import com.example.mobv.retrofit.BodyApi
-import com.example.mobv.retrofit.RetrofitHelper
+import com.example.mobv.api.BodyGetAllPubs
+import com.example.mobv.api.RetrofitHelper
 import com.example.sqlbasics.AppDatabase
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import com.example.mobv.retrofit.PubsApi
+import com.example.mobv.api.PubsApi
 import com.example.sqlbasics.PubDB
-import retrofit2.create
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,7 +55,7 @@ class MainActivity : AppCompatActivity() {
             // launching a new coroutine
             GlobalScope.launch {
 
-                val result = quotesApi.getPubs(BodyApi())
+                val result = quotesApi.getPubs(BodyGetAllPubs())
                 if (result != null)
                 // Checking the results
                     Log.d("testingOut: ", result.body().toString())

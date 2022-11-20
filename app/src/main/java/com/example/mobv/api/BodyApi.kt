@@ -1,6 +1,6 @@
-package com.example.mobv.retrofit
+package com.example.mobv.api
 
-data class BodyApi (
+data class BodyGetAllPubs (
     val collection: String = "bars",
     val database: String = "mobvapp",
     val dataSource: String = "Cluster0"){}

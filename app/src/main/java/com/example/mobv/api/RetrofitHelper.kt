@@ -1,4 +1,4 @@
-package com.example.mobv.retrofit
+package com.example.mobv.api
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
