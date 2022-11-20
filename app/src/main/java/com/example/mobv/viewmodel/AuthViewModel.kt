@@ -29,10 +29,10 @@ class AuthViewModel(/**private val repository: DataRepository**/): ViewModel() {
                 val result = _api.signUp(BodySignUp(name, password))
                 if (result.body() != null){
                     Log.d("testingViewModel: ", result.body().toString())
-                    if (result.body()?.uid != -1){
+                    if (result.code() == 200 && result.body()?.uid != -1){
                         Toast.makeText(context,"Registration successful", Toast.LENGTH_SHORT).show()
-
                     }
+                    else if (result.code() != 200) Toast.makeText(context,"Error code: ${result.code()}", Toast.LENGTH_SHORT).show()
                     else Toast.makeText(context,"User already exists!", Toast.LENGTH_SHORT).show()
 
                 }
@@ -48,11 +48,11 @@ class AuthViewModel(/**private val repository: DataRepository**/): ViewModel() {
             viewModelScope.launch {
                 val result = _api.signIn(BodySignUp(name, password))
                 if (result.body() != null){
-                    Log.d("testingViewModel: ", result.body().toString())
-                    if (result.body()?.uid != -1){
+                    Log.d("testingViewModel: ", result.toString())
+                    if (result.code() == 200 && result.body()?.uid != -1){
                         Toast.makeText(context,"Login successful", Toast.LENGTH_SHORT).show()
-
                     }
+                    else if (result.code() != 200) Toast.makeText(context,"Error code: ${result.code()}", Toast.LENGTH_SHORT).show()
                     else Toast.makeText(context,"Incorrect username or password!", Toast.LENGTH_SHORT).show()
 
                 }
