@@ -10,6 +10,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.*
 import com.example.mobv.api.BodyGetAllPubs
+import com.example.mobv.api.BodySignUp
 import com.example.mobv.api.PubsApi
 import com.example.mobv.api.RetrofitHelper
 import kotlinx.coroutines.launch
@@ -25,10 +26,17 @@ class AuthViewModel(/**private val repository: DataRepository**/): ViewModel() {
         if (isNetworkAvailable(context)){
             loading.postValue(true)
             viewModelScope.launch {
-                val result = _api.getPubs(BodyGetAllPubs())
-                if (result != null)
-                // Checking the results
+                val result = _api.signUp(BodySignUp(name, password))
+                if (result != null){
                     Log.d("testingViewModel: ", result.body().toString())
+                    if (result.body()?.uid != -1){
+                        Toast.makeText(context,"Registration successful", Toast.LENGTH_SHORT).show()
+
+                    }
+                    else Toast.makeText(context,"User already exists!", Toast.LENGTH_SHORT).show()
+
+                }
+
                 loading.postValue(false)
             }
         }

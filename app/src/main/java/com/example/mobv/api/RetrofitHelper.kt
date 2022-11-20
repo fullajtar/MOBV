@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitHelper {
 
-    val baseUrl = "https://data.mongodb-api.com/app/data-fswjp/endpoint/data/v1/action/" //"https://quotable.io/"
+    val baseUrl = "https://zadanie.mpage.sk/user/"
 
     fun getInstance(): Retrofit {
         return Retrofit.Builder().baseUrl(baseUrl)
