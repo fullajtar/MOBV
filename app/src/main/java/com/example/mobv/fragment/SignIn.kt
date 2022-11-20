@@ -5,10 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.mobv.R
 import com.example.mobv.databinding.FragmentNewPubBinding
 import com.example.mobv.databinding.FragmentSignInBinding
+import com.example.mobv.viewmodel.AuthViewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,15 +28,14 @@ class SignIn : Fragment() {
     private var param2: String? = null
     private var _binding: FragmentSignInBinding? = null
     private val binding get() = _binding!!
+    private lateinit var authViewModel: AuthViewModel
+
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+        authViewModel = AuthViewModel()
     }
 
     override fun onCreateView(
@@ -52,6 +53,20 @@ class SignIn : Fragment() {
             findNavController().navigate(
                 SignInDirections.actionSignInToSignUp()
             )
+        }
+
+        binding.buttonSignIn.setOnClickListener{
+            if (binding.signinUsername.text.toString().isNotBlank() && binding.signinPassword.text.toString().isNotBlank()) {
+                authViewModel.signin(
+                    binding.signinUsername.text.toString(),
+                    binding.signinPassword.text.toString(),
+                    requireContext()
+                )
+            } else if (binding.signinUsername.text.toString().isBlank() || binding.signinPassword.text.toString().isBlank()){
+                Toast.makeText(activity,"Fill in name and password", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(activity,"Passwords must be matching", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

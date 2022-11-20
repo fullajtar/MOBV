@@ -27,7 +27,7 @@ class AuthViewModel(/**private val repository: DataRepository**/): ViewModel() {
             loading.postValue(true)
             viewModelScope.launch {
                 val result = _api.signUp(BodySignUp(name, password))
-                if (result != null){
+                if (result.body() != null){
                     Log.d("testingViewModel: ", result.body().toString())
                     if (result.body()?.uid != -1){
                         Toast.makeText(context,"Registration successful", Toast.LENGTH_SHORT).show()
@@ -42,17 +42,25 @@ class AuthViewModel(/**private val repository: DataRepository**/): ViewModel() {
         }
     }
 
-//    fun signup(name: String, password: String){
-//        viewModelScope.launch {
-//            loading.postValue(true)
-//            repository.apiUserCreate(
-//                name,password,
-//                { _message.postValue(Evento(it)) },
-//                { user.postValue(it) }
-//            )
-//            loading.postValue(false)
-//        }
-//    }
+    fun signin(name: String, password: String, context: Context){
+        if (isNetworkAvailable(context)){
+            loading.postValue(true)
+            viewModelScope.launch {
+                val result = _api.signIn(BodySignUp(name, password))
+                if (result.body() != null){
+                    Log.d("testingViewModel: ", result.body().toString())
+                    if (result.body()?.uid != -1){
+                        Toast.makeText(context,"Login successful", Toast.LENGTH_SHORT).show()
+
+                    }
+                    else Toast.makeText(context,"Incorrect username or password!", Toast.LENGTH_SHORT).show()
+
+                }
+
+                loading.postValue(false)
+            }
+        }
+    }
 
     fun isNetworkAvailable(context: Context?): Boolean {
         if (context == null) return false
