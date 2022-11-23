@@ -32,6 +32,10 @@ interface PubsApi {
     @POST("user/refresh.php")
     fun userRefresh(@Body user: UserRefreshRequest) : Call<UserResponse>
 
+    @GET("bar/list.php")
+    @Headers("mobv-auth: accept")
+    suspend fun barList() : Response<List<BarListResponse>>
+
     companion object{
         const val baseUrl = "https://zadanie.mpage.sk/"
 

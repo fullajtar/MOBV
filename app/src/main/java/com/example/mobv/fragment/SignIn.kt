@@ -1,16 +1,20 @@
 package com.example.mobv.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.mobv.R
+import com.example.mobv.api.PubsApi
 import com.example.mobv.databinding.FragmentNewPubBinding
 import com.example.mobv.databinding.FragmentSignInBinding
 import com.example.mobv.viewmodel.AuthViewModel
+import kotlinx.coroutines.launch
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,6 +65,21 @@ class SignIn : Fragment() {
                     binding.signinUsername.text.toString(),
                     binding.signinPassword.text.toString(),
                     requireContext()
+                )
+                val _api: PubsApi = PubsApi.create(requireContext())
+
+                lifecycleScope.launch {
+                    val result = _api.barList()
+                    Log.d("testingOut: ", result.toString())
+
+
+                }
+
+
+
+                //TODO: CHECK IF LOGIN WAS SUCCESSFUL!
+                findNavController().navigate(
+                    SignInDirections.actionSignInToRegistration()
                 )
             } else if (binding.signinUsername.text.toString().isBlank() || binding.signinPassword.text.toString().isBlank()){
                 Toast.makeText(activity,"Fill in name and password", Toast.LENGTH_SHORT).show()

@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/signUp">
+    app:startDestination="@id/signIn">
 <!--    app:startDestination="@id/registration">-->
 
     <fragment
@@ -58,6 +58,9 @@
         <action
             android:id="@+id/action_signUp_to_signIn"
             app:destination="@id/signIn" />
+        <action
+            android:id="@+id/action_signUp_to_registration"
+            app:destination="@id/registration" />
     </fragment>
     <fragment
         android:id="@+id/signIn"
@@ -67,6 +70,9 @@
         <action
             android:id="@+id/action_signIn_to_signUp"
             app:destination="@id/signUp" />
+        <action
+            android:id="@+id/action_signIn_to_registration"
+            app:destination="@id/registration" />
     </fragment>
 
 </navigation>
