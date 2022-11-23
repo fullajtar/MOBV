@@ -6,7 +6,6 @@ import com.example.mobv.BuildConfig
 import com.example.mobv.helper.PreferenceData
 import okhttp3.Interceptor
 import okhttp3.Response
-//source: https://github.com/marosc/mobv2022
 
 class AuthInterceptor(val context: Context) : Interceptor {
 

@@ -13,6 +13,7 @@ import com.example.mobv.R
 import com.example.mobv.api.BodyGetAllPubs
 import com.example.mobv.databinding.FragmentSignInBinding
 import com.example.mobv.databinding.FragmentSignUpBinding
+import com.example.mobv.helper.Injection
 import com.example.mobv.viewmodel.AuthViewModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -37,7 +38,11 @@ class SignUp : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        authViewModel = AuthViewModel()
+
+        authViewModel = ViewModelProvider(
+            this,
+            Injection.provideViewModelFactory(requireContext())
+        ).get(AuthViewModel::class.java)
     }
 
     override fun onCreateView(

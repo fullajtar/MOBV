@@ -15,7 +15,6 @@ interface PubsApi {
         "Content-Type: application/json",
         "Cache-Control: no-cache",
         "Content-Type: application/json",
-        "x-apikey: ${BuildConfig.API_KEY}"
     )
     @POST("user/create.php")
     suspend fun signUp( @Body body: BodySignUp ) : Response<UserResponse>
@@ -24,7 +23,6 @@ interface PubsApi {
         "Content-Type: application/json",
         "Cache-Control: no-cache",
         "Content-Type: application/json",
-        "x-apikey: ${BuildConfig.API_KEY}"
     )
     @POST("user/login.php")
     suspend fun signIn( @Body body: BodySignUp ) : Response<UserResponse>
