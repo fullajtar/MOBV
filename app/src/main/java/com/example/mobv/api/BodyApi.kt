@@ -8,3 +8,7 @@ data class BodyGetAllPubs (
 data class BodySignUp (
     var name: String = "username25565",
     var password: String = "heslo25565"){}
+
+data class UserRefreshRequest(
+    val refresh: String
+){}

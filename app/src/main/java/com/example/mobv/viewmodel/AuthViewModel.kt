@@ -1,7 +1,6 @@
 package com.example.mobv.viewmodel
 //source: https://github.com/marosc/mobv2022
 
-import android.app.Activity
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
@@ -9,14 +8,12 @@ import android.os.Build
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.*
-import com.example.mobv.api.BodyGetAllPubs
 import com.example.mobv.api.BodySignUp
 import com.example.mobv.api.PubsApi
-import com.example.mobv.api.RetrofitHelper
 import kotlinx.coroutines.launch
 
 class AuthViewModel(/**private val repository: DataRepository**/): ViewModel() {
-    private val _api: PubsApi = RetrofitHelper.getInstance().create(PubsApi::class.java)
+    private val _api: PubsApi = PubsApi.getInstance().create(PubsApi::class.java)
 
 //    val user= MutableLiveData<UserResponse>(null)
 

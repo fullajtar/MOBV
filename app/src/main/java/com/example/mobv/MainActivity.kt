@@ -1,23 +1,16 @@
 package com.example.mobv
 
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mobv.model.Pubs
 import com.example.mobv.model.PubsSingleton
-import com.example.mobv.api.BodyGetAllPubs
-import com.example.mobv.api.RetrofitHelper
 import com.example.sqlbasics.AppDatabase
+import com.example.sqlbasics.PubDB
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import com.example.mobv.api.PubsApi
-import com.example.sqlbasics.PubDB
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
