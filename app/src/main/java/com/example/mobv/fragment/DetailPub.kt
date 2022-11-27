@@ -3,6 +3,7 @@ package com.example.mobv.fragment
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.system.Os.remove
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.example.mobv.databinding.FragmentDetailPubBinding
 import androidx.navigation.fragment.findNavController
+import com.example.mobv.model.BarsSingleton
 import com.example.mobv.model.PubsSingleton
 
 
@@ -29,13 +31,13 @@ class DetailPub : Fragment() {
         val view = binding.root
 
         // Receive the arguments in a variable
-        val pub = args.pub
+        val pub = args.bar
 
         // set the values to respective textViews
-        binding.detailPubPubNameValue.text = pub.tags!!.name.toString()
-        binding.detailPubWebsiteValue.text = pub.tags!!.website.toString()
-        binding.detailPubPhoneNumberValue.text = pub.tags!!.phone.toString()
-        binding.detailPubOpeningHoursValue.text = pub.tags!!.opening_hours.toString()
+        binding.detailPubPubNameValue.text = pub.bar_name.toString()
+//        binding.detailPubWebsiteValue.text = pub.tags!!.website.toString()
+//        binding.detailPubPhoneNumberValue.text = pub.tags!!.phone.toString()
+//        binding.detailPubOpeningHoursValue.text = pub.tags!!.opening_hours.toString()
 
         val latitudeString = pub.lat.toString()
         val longitudeString = pub.lon.toString()
@@ -54,7 +56,7 @@ class DetailPub : Fragment() {
         }
 
         binding.detailRemoveButton.setOnClickListener {
-            PubsSingleton.pubs.elements!!.remove(pub)
+            BarsSingleton.bars?.remove(pub)
             findNavController().navigate(
                 DetailPubDirections.actionDetailToListPub()
             )

@@ -8,6 +8,8 @@ import android.widget.Toast
 import com.example.mobv.api.BodySignUp
 import com.example.mobv.api.PubsApi
 import com.example.mobv.api.UserResponse
+import com.example.mobv.model.Bar
+import com.example.mobv.model.BarsSingleton
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -101,22 +103,23 @@ class DataRepository private constructor(
 //        }
 //    }
 
-    suspend fun apiBarList() {
+    suspend fun apiBarList(): String {
         try {
             val resp = service.barList()
             if (resp.isSuccessful) {
                 resp.body()?.let { bars ->
-
-//                    val b = bars.map {
-//                        BarItem(
-//                            it.bar_id,
-//                            it.bar_name,
-//                            it.bar_type,
-//                            it.lat,
-//                            it.lon,
-//                            it.users
-//                        )
-//                    }
+                    val b = bars.map {
+                        Bar(
+                            it.bar_id,
+                            it.bar_name,
+                            it.lat,
+                            it.lon,
+                            it.bar_type,
+                            it.users
+                        )
+                    }
+                    BarsSingleton.bars = b as MutableList<Bar>
+                    return "Success"
 //                    cache.deleteBars()
 //                    cache.insertBars(b)
                 } //?: onError("Failed to load bars")
@@ -130,6 +133,7 @@ class DataRepository private constructor(
             ex.printStackTrace()
 //            onError("Failed to load bars, error.")
         }
+        return "Failure"
     }
 
 //    suspend fun apiNearbyBars(

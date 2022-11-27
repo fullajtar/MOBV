@@ -31,8 +31,8 @@
         android:label="fragment_details"
         tools:layout="@layout/fragment_detail_pub" >
         <argument
-            android:name="pub"
-            app:argType="com.example.mobv.model.Pub" />
+            android:name="bar"
+            app:argType="com.example.mobv.model.Bar" />
         <action
             android:id="@+id/action_detail_to_listPub"
             app:destination="@id/listPub" />

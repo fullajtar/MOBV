@@ -17,9 +17,18 @@
             android:id="@+id/listPub_buttonSort"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sort"
+            android:text="Sort: Name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/listPub_buttonSortUsers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sort: Users"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/listPub_buttonSort"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
