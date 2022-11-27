@@ -35,9 +35,8 @@ class DetailPub : Fragment() {
 
         // set the values to respective textViews
         binding.detailPubPubNameValue.text = pub.bar_name.toString()
-//        binding.detailPubWebsiteValue.text = pub.tags!!.website.toString()
-//        binding.detailPubPhoneNumberValue.text = pub.tags!!.phone.toString()
-//        binding.detailPubOpeningHoursValue.text = pub.tags!!.opening_hours.toString()
+        binding.detailPubWebsiteValue.text = pub.bar_type.toString()
+        binding.detailPubPhoneNumberValue.text = pub.users.toString()
 
         val latitudeString = pub.lat.toString()
         val longitudeString = pub.lon.toString()
@@ -53,13 +52,6 @@ class DetailPub : Fragment() {
             mapIntent.resolveActivity(packageManager)?.let {
                 startActivity(mapIntent)
             }
-        }
-
-        binding.detailRemoveButton.setOnClickListener {
-            BarsSingleton.bars?.remove(pub)
-            findNavController().navigate(
-                DetailPubDirections.actionDetailToListPub()
-            )
         }
 
         return view
