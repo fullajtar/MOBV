@@ -15,13 +15,15 @@ import com.example.mobv.R
 import com.example.mobv.api.PubsApi
 import com.example.mobv.databinding.FragmentNewPubBinding
 import com.example.mobv.databinding.FragmentSignInBinding
+import com.example.mobv.databinding.FragmentSignUpBinding
 import com.example.mobv.helper.Injection
 import com.example.mobv.helper.PreferenceData
 import com.example.mobv.viewmodel.AuthViewModel
 import kotlinx.coroutines.launch
 
 class SignIn : Fragment() {
-    private lateinit var binding: FragmentSignInBinding
+    private var _binding: FragmentSignInBinding? = null
+    private val binding get() = _binding!!
     private lateinit var authViewModel: AuthViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +39,7 @@ class SignIn : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSignInBinding.inflate(inflater, container, false)
+        _binding = FragmentSignInBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -49,7 +51,7 @@ class SignIn : Fragment() {
             Log.d("GameFragment", "You re logged in already")
 
             findNavController().navigate(
-                SignInDirections.actionSignInToRegistration()
+                SignInDirections.actionSignInToListPub()
             )
             return
         }
@@ -57,7 +59,6 @@ class SignIn : Fragment() {
             lifecycleOwner = viewLifecycleOwner
             model = authViewModel
         }
-
 
         binding.buttonSignUp.setOnClickListener{
             findNavController().navigate(
@@ -72,11 +73,6 @@ class SignIn : Fragment() {
                     binding.signinPassword.text.toString(),
                     requireContext()
                 )
-
-                //TODO: CHECK IF LOGIN WAS SUCCESSFUL!
-//                findNavController().navigate(
-//                    SignInDirections.actionSignInToRegistration()
-//                )
             } else if (binding.signinUsername.text.toString().isBlank() || binding.signinPassword.text.toString().isBlank()){
                 Toast.makeText(activity,"Fill in name and password", Toast.LENGTH_SHORT).show()
             } else {
@@ -87,7 +83,7 @@ class SignIn : Fragment() {
         authViewModel.user.observe(viewLifecycleOwner){
             it?.let {
                 PreferenceData.getInstance().putUserItem(requireContext(),it)
-                Navigation.findNavController(requireView()).navigate(R.id.action_signIn_to_registration)
+                Navigation.findNavController(requireView()).navigate(R.id.action_signIn_to_listPub)
             }
         }
     }

@@ -15,29 +15,18 @@ import com.example.mobv.api.UserResponse
 import kotlinx.coroutines.launch
 
 class AuthViewModel(private val repository: DataRepository): ViewModel() {
-    private val _api: PubsApi = PubsApi.getInstance().create(PubsApi::class.java)
-
     val user= MutableLiveData<UserResponse>(null)
-
     val loading = MutableLiveData(false)
 
     fun signup(name: String, password: String, context: Context){
         if (isNetworkAvailable(context)){
-            loading.postValue(true)
-//            viewModelScope.launch {
-//                val result = repository.apiUserCreate(name, password) //_api.signUp(BodySignUp(name, password))
-//                if (result.body() != null){
-//                    Log.d("testingViewModel: ", result.body().toString())
-//                    if (result.code() == 200 && result.body()?.uid != -1){
-//                        Toast.makeText(context,"Registration successful", Toast.LENGTH_SHORT).show()
-//                    }
-//                    else if (result.code() != 200) Toast.makeText(context,"Error code: ${result.code()}", Toast.LENGTH_SHORT).show()
-//                    else Toast.makeText(context,"User already exists!", Toast.LENGTH_SHORT).show()
-//
-//                }
-//
-//                loading.postValue(false)
-//            }
+            if (isNetworkAvailable(context)){
+                loading.postValue(true)
+                viewModelScope.launch {
+                    repository.apiUserCreate(name, password, context) { user.postValue(it) }
+                    loading.postValue(false)
+                }
+            }
         }
     }
 

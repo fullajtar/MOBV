@@ -17,6 +17,7 @@ import com.example.mobv.databinding.FragmentListPubBinding
 import com.example.mobv.helper.Injection
 import com.example.mobv.helper.PreferenceData
 import com.example.mobv.model.PubsSingleton
+import com.example.mobv.model.PubsSingleton.pubs
 import com.example.mobv.viewmodel.BarsViewModel
 import kotlinx.android.synthetic.main.fragment_list_pub.*
 import kotlinx.android.synthetic.main.fragment_list_pub.view.*
@@ -55,30 +56,6 @@ class ListPub : Fragment() {
                 pubs.elements!!.sortBy { it.tags!!.name }
             }
         }
-
-        binding.listPubButtonSort.setOnClickListener{
-            if (pubs.sortBy == null){
-                pubs.sortBy = "ascending"
-            }
-            else if (pubs.sortBy.equals("ascending")){
-                pubs.sortBy = "descending"
-            }
-            else if (pubs.sortBy.equals("descending")){
-                pubs.sortBy = "ascending"
-            }
-
-            findNavController().navigate(
-                ListPubDirections.actionRegistrationToRegistration()
-            )
-
-
-        }
-
-        binding.listPubButtonAdd.setOnClickListener{
-            findNavController().navigate(
-                ListPubDirections.actionRegistrationToNewPub()
-            )
-        }
 //        pass obj to Adapter for Recycler
         binding.ListPubRecyclerView.ListPub_recyclerView.adapter = PubAdapter(requireContext(), pubs.elements!! ,findNavController())
 
@@ -91,16 +68,37 @@ class ListPub : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.listPubButtonSort.setOnClickListener{
+            if (pubs.sortBy == null){
+                pubs.sortBy = "ascending"
+            }
+            else if (pubs.sortBy.equals("ascending")){
+                pubs.sortBy = "descending"
+            }
+            else if (pubs.sortBy.equals("descending")){
+                pubs.sortBy = "ascending"
+            }
+            findNavController().navigate(
+                ListPubDirections.actionListPubToListPub()
+            )
+        }
+
+        binding.listPubButtonAdd.setOnClickListener{
+            findNavController().navigate(
+                ListPubDirections.actionListPubToNewPub()
+            )
+        }
+
+        binding.listPubButtonSignOut.setOnClickListener{
+            PreferenceData.getInstance().clearData(requireContext())
+            findNavController().navigate(
+                ListPubDirections.actionListPubToSignIn()
+            )
+        }
 
         swiperefresh.setOnRefreshListener {
-            Log.d("testingOut: ", "TestingOnRefreshListener")
-            Log.d("testingOut: ", "TestingOnRefreshListener2")
-
             viewmodel.refreshData()
-
-            // on below line we are setting is refreshing to false.
             swiperefresh.isRefreshing = false
-
         }
     }
 

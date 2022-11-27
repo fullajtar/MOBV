@@ -18,7 +18,7 @@ class DetailPub : Fragment() {
     private var _binding: FragmentDetailPubBinding? = null
     private val binding get() = _binding!!
 
-    // get the arguments from the Registration fragment
+    // get the arguments from the PubList fragment
     private val args : DetailPubArgs by navArgs()
 
     override fun onCreateView(
@@ -56,7 +56,7 @@ class DetailPub : Fragment() {
         binding.detailRemoveButton.setOnClickListener {
             PubsSingleton.pubs.elements!!.remove(pub)
             findNavController().navigate(
-                DetailPubDirections.actionDetailToRegistration()
+                DetailPubDirections.actionDetailToListPub()
             )
         }
 

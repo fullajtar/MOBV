@@ -45,7 +45,7 @@ class NewPub : Fragment() {
                 )
                 PubsSingleton.pubs.elements?.add(pub)
                 findNavController().navigate(
-                    NewPubDirections.actionNewPubToRegistration()
+                    NewPubDirections.actionNewPubToListPub()
                 )
             }
             catch(e: Exception){

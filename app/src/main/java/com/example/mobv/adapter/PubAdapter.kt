@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.fragment_list_pub.view.*
 import kotlinx.android.synthetic.main.list_item_pub.view.*
 
 /**
- * Adapter for the [RecyclerView] in [RegistrationFragment]. Displays [Pub] data object.
+ * Adapter for the [RecyclerView] in [ListPubnFragment]. Displays [Pub] data object.
  */
 class PubAdapter (
     private val context: Context,
@@ -51,7 +51,7 @@ class PubAdapter (
         holder.textView.setOnClickListener {
             (holder.textView.setTextColor(Color.GREEN))
             findNavController.navigate(
-                ListPubDirections.actionRegistrationToDetails( item )
+                ListPubDirections.actionListPubToDetails( item )
             )
         } // click event
 

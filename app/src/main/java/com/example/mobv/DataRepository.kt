@@ -20,32 +20,30 @@ class DataRepository private constructor(
     suspend fun apiUserCreate(
         name: String,
         password: String,
-//        onError: (error: String) -> Unit,
-//        onStatus: (success: UserResponse?) -> Unit
+        context: Context,
+        onStatus: (success: UserResponse?) -> Unit
     ) {
         try {
             val resp = service.signUp(BodySignUp(name = name, password = password))
             if (resp.isSuccessful) {
                 resp.body()?.let { user ->
                     if (user.uid == (-1)){
-//                        onStatus(null)
-//                        onError("Name already exists. Choose another.")
+                        onStatus(null)
                     }else {
-//                        onStatus(user)
+                        Toast.makeText(context,"SignUp successful", Toast.LENGTH_SHORT).show()
+                        onStatus(user)
                     }
                 }
             } else {
-//                onError("Failed to sign up, try again later.")
-//                onStatus(null)
+                Toast.makeText(context,"Error code: ${resp.code()}", Toast.LENGTH_SHORT).show()
+                onStatus(null)
             }
         } catch (ex: IOException) {
             ex.printStackTrace()
-//            onError("Sign up failed, check internet connection")
-//            onStatus(null)
+            onStatus(null)
         } catch (ex: Exception) {
             ex.printStackTrace()
-//            onError("Sign up failed, error.")
-//            onStatus(null)
+            onStatus(null)
         }
     }
 
@@ -53,7 +51,6 @@ class DataRepository private constructor(
         name: String,
         password: String,
         context: Context,
-//        onError: (error: String) -> Unit,
         onStatus: (success: UserResponse?) -> Unit
     ) {
         try {
@@ -62,25 +59,21 @@ class DataRepository private constructor(
                 resp.body()?.let { user ->
                     if (user.uid == (-1)){
                         onStatus(null)
-//                        onError("Wrong name or password.")
                         Toast.makeText(context ,"Incorrect username or password!", Toast.LENGTH_SHORT).show()
                     }else {
-                        Toast.makeText(context,"Login successful", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context,"SignIn successful", Toast.LENGTH_SHORT).show()
                         onStatus(user)
                     }
                 }
             } else {
                 Toast.makeText(context,"Error code: ${resp.code()}", Toast.LENGTH_SHORT).show()
-//                onError("Failed to login, try again later.")
                 onStatus(null)
             }
         } catch (ex: IOException) {
             ex.printStackTrace()
-//            onError("Login failed, check internet connection")
             onStatus(null)
         } catch (ex: Exception) {
             ex.printStackTrace()
-//            onError("Login in failed, error.")
             onStatus(null)
         }
     }
