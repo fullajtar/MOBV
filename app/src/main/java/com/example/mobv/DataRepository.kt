@@ -5,11 +5,10 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
-import com.example.mobv.api.BodySignUp
-import com.example.mobv.api.PubsApi
-import com.example.mobv.api.UserResponse
+import com.example.mobv.api.*
 import com.example.mobv.model.Bar
 import com.example.mobv.model.BarsSingleton
+import com.example.mobv.model.FriendsSingleton
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -204,6 +203,43 @@ class DataRepository private constructor(
 //    fun dbBars() : LiveData<List<BarItem>?> {
 //        return cache.getBars()
 //    }
+
+    suspend fun apiAddFriend(
+        name: String,
+        context: Context
+    ) {
+        try {
+            val resp = service.addFriend(BodyAddFriend(name))
+            if (resp.isSuccessful) {
+                Toast.makeText(context,"Friend follow successful", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(context,"Error code: ${resp.code()}", Toast.LENGTH_SHORT).show()
+            }
+        } catch (ex: IOException) {
+            ex.printStackTrace()
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
+    }
+
+    suspend fun apiGetFriendList(
+        context: Context
+    ): String {
+        try {
+            val resp = service.getFriendList()
+            if (!resp.isSuccessful){
+                Toast.makeText(context,"Error code: ${resp.code()}", Toast.LENGTH_SHORT).show()
+            }
+            FriendsSingleton.friends = resp.body() as MutableList<FriendResponse>
+            return "Success"
+
+        } catch (ex: IOException) {
+            ex.printStackTrace()
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
+        return "Failure"
+    }
 
     companion object{
         @Volatile

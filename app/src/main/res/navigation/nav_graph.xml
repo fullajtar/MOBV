@@ -23,6 +23,9 @@
         <action
             android:id="@+id/action_listPub_to_signIn"
             app:destination="@id/signIn" />
+        <action
+            android:id="@+id/action_listPub_to_friendList"
+            app:destination="@id/friendList" />
     </fragment>
 
     <fragment
@@ -75,6 +78,27 @@
         <action
             android:id="@+id/action_signIn_to_listPub"
             app:destination="@id/listPub" />
+    </fragment>
+    <fragment
+        android:id="@+id/friendList"
+        android:name="com.example.mobv.fragment.FriendList"
+        android:label="fragment_friend_list"
+        tools:layout="@layout/fragment_friend_list" >
+        <action
+            android:id="@+id/action_friendList_to_addFriend"
+            app:destination="@id/addFriend" />
+        <action
+            android:id="@+id/action_friendList_self"
+            app:destination="@id/friendList" />
+    </fragment>
+    <fragment
+        android:id="@+id/addFriend"
+        android:name="com.example.mobv.fragment.AddFriend"
+        android:label="fragment_add_friend"
+        tools:layout="@layout/fragment_add_friend" >
+        <action
+            android:id="@+id/action_addFriend_to_friendList"
+            app:destination="@id/friendList" />
     </fragment>
 
 </navigation>

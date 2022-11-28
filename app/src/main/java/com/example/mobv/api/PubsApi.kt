@@ -34,6 +34,14 @@ interface PubsApi {
     @Headers("mobv-auth: accept")
     suspend fun barList() : Response<List<BarListResponse>>
 
+    @POST("contact/message.php")
+    @Headers("mobv-auth: accept")
+    suspend fun addFriend( @Body contact: BodyAddFriend) : Response<*>
+
+    @GET("contact/list.php")
+    @Headers("mobv-auth: accept")
+    suspend fun getFriendList() : Response<List<FriendResponse>>
+
     companion object{
         const val baseUrl = "https://zadanie.mpage.sk/"
 

@@ -1,6 +1,7 @@
 package com.example.mobv.model
 
 import android.os.Parcelable
+import com.example.mobv.api.FriendResponse
 import kotlinx.android.parcel.Parcelize
 
 object PubsSingleton{
@@ -30,6 +31,10 @@ data class Pub (
     var lon: Number? = null,
     var tags: Tags? = null
 ): Parcelable
+
+object FriendsSingleton{
+    var friends: MutableList<FriendResponse>? = null
+}
 
 object BarsSingleton{
     var bars: MutableList<Bar>? = null

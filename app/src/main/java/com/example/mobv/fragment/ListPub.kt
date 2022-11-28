@@ -17,6 +17,7 @@ import com.example.mobv.viewmodel.BarsViewModel
 import kotlinx.android.synthetic.main.fragment_list_pub.*
 import kotlinx.android.synthetic.main.fragment_list_pub.view.*
 
+//TODO AFTER LOGIN TIMEOUT REDIRECT TO LOGIN
 class ListPub : Fragment() {
 
     private var _binding: FragmentListPubBinding? = null
@@ -89,6 +90,12 @@ class ListPub : Fragment() {
             )
         }
 
+        binding.listPubButtonFriendsList.setOnClickListener{
+            findNavController().navigate(
+                ListPubDirections.actionListPubToFriendList()
+            )
+        }
+
         swiperefresh.setOnRefreshListener {
             viewmodel.refreshData()
             swiperefresh.isRefreshing = false
@@ -105,8 +112,8 @@ class ListPub : Fragment() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+//    override fun onDestroyView() {
+//        super.onDestroyView()
+//        _binding = null
+//    }
 }

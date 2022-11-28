@@ -12,3 +12,7 @@ data class BodySignUp (
 data class UserRefreshRequest(
     val refresh: String
 ){}
+
+data class BodyAddFriend(
+    val contact: String
+){}
