@@ -1,14 +1,19 @@
 package com.example.mobv.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobv.R
 import com.example.mobv.api.FriendResponse
+import com.example.mobv.fragment.FriendListDirections
+import com.example.mobv.model.Bar
+import com.example.mobv.viewmodel.FriendViewModel
 import kotlinx.android.synthetic.main.fragment_friend_list.view.*
 import kotlinx.android.synthetic.main.list_item_friend.view.*
 
@@ -46,13 +51,20 @@ class FriendAdapter(
         val item = dataset[position]
         val text = "${item.user_name} \n bar: ${item.bar_name}"
         holder.textView.text =  text
-//        holder.textView.setOnClickListener {
-//            (holder.textView.setTextColor(Color.GREEN))
-//////            navigate to detail of pub
-////            findNavController.navigate(
-////                ListPubDirections.actionListPubToDetails( item )
-////            )
-//        } // click event
+        holder.textView.setOnClickListener {
+//            navigate to detail of pub
+            if (item.bar_id != null){
+                val bar = Bar(item.bar_id, item.bar_name, item.bar_lat, item.bar_lon, null, null)
+                Log.d("testingOut: ", "bar: ${bar}")
+                findNavController.navigate(
+                    FriendListDirections.actionFriendListToDetail(bar)
+                )
+            }
+            else{
+                Toast.makeText(context ,"Friend is not in a bar!", Toast.LENGTH_SHORT).show()
+            }
+
+        } // click event
 
     }
 

@@ -90,6 +90,9 @@
         <action
             android:id="@+id/action_friendList_self"
             app:destination="@id/friendList" />
+        <action
+            android:id="@+id/action_friendList_to_detail"
+            app:destination="@id/detail" />
     </fragment>
     <fragment
         android:id="@+id/addFriend"

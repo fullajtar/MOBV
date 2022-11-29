@@ -1,6 +1,7 @@
 package com.example.mobv.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,8 @@ import com.example.mobv.helper.Injection
 import com.example.mobv.model.FriendsSingleton
 
 import com.example.mobv.viewmodel.FriendViewModel
+import kotlinx.android.synthetic.main.fragment_friend_list.*
+import kotlinx.android.synthetic.main.fragment_list_pub.*
 import kotlinx.android.synthetic.main.fragment_list_pub.view.*
 
 
@@ -40,8 +43,7 @@ class FriendList : Fragment() {
         val view = binding.root
 
         if (FriendsSingleton.friends != null){
-            val tmp = FriendAdapter(requireContext(), FriendsSingleton.friends!!, findNavController())
-            binding.FriendListRecyclerView.adapter = tmp
+            binding.FriendListRecyclerView.adapter = FriendAdapter(requireContext(), FriendsSingleton.friends!!, findNavController())
 
             // Use this setting to improve performance if you know that changes
             // in content do not change the layout size of the RecyclerView
@@ -59,6 +61,11 @@ class FriendList : Fragment() {
             findNavController().navigate(
                 FriendListDirections.actionFriendListToAddFriend()
             )
+        }
+
+        swiperefreshFriends.setOnRefreshListener {
+            viewmodel.getFriendList(requireContext())
+            swiperefreshFriends.isRefreshing = false
         }
 
         viewmodel.friends.observe(viewLifecycleOwner){
