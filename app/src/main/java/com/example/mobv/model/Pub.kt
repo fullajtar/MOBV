@@ -3,6 +3,7 @@ package com.example.mobv.model
 import android.os.Parcelable
 import android.util.Log
 import com.example.mobv.api.FriendResponse
+import com.example.mobv.model.BarsSingleton.sortBy
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.SphericalUtil
 import kotlinx.android.parcel.Parcelize
@@ -84,6 +85,18 @@ object BarsSingleton{
     var bars: MutableList<Bar>? = null
     var sortBy: String? = null
 
+    fun initDistance(lat: Double, lon: Double) {
+        BarsSingleton.bars!!.forEach {
+            if (it.lat != null && it.lon != null){
+                val distance = SphericalUtil.computeDistanceBetween(
+                    LatLng(lat, lon),
+                    LatLng(it.lat!!.toDouble(), it.lon!!.toDouble())
+                )
+                it.disFromLastPosition = distance
+            }
+        }
+    }
+
     fun sortBy(){
         if (sortBy != null){
             if (sortBy!! == "ascending") {
@@ -98,7 +111,14 @@ object BarsSingleton{
             else if (sortBy!! == "descendingUsers") {
                 bars!!.sortByDescending { it.users as Int }
             }
+            else if (sortBy!! == "ascendingDistance"){
+                bars!!.sortBy { it.disFromLastPosition }
+            }
+            else if (sortBy!! == "descendingDistance"){
+                bars!!.sortByDescending { it.disFromLastPosition }
+            }
         }
+
     }
 
     fun toggleSortByName(){
@@ -111,6 +131,7 @@ object BarsSingleton{
         else if (sortBy.equals("descending")){
             sortBy = "ascending"
         }
+        sortBy()
     }
 
     fun toggleSortByUsers(){
@@ -123,6 +144,20 @@ object BarsSingleton{
         else if (sortBy.equals("descendingUsers")){
             sortBy = "ascendingUsers"
         }
+        sortBy()
+    }
+
+    fun toggleSortByDistance(){
+        if (sortBy == null){
+            sortBy = "ascendingDistance"
+        }
+        else if (sortBy.equals("ascendingDistance")){
+            sortBy = "descendingDistance"
+        }
+        else if (sortBy.equals("descendingDistance")){
+            sortBy = "ascendingDistance"
+        }
+        sortBy()
     }
 }
 
@@ -134,6 +169,7 @@ data class Bar(
     var lon: Number? = null,
     var bar_type: String? = null,
     var users: Number? = null,
+    var disFromLastPosition: Double? = null
 ): Parcelable
 
 

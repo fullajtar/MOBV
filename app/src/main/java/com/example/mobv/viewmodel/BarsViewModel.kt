@@ -7,6 +7,7 @@ import com.example.mobv.DataRepository
 import com.example.mobv.model.Bar
 import com.example.mobv.model.BarsSingleton
 import com.example.mobv.model.BarsSingleton.bars
+import com.example.mobv.model.Coords
 import com.example.mobv.model.PubsSingleton
 import kotlinx.coroutines.launch
 
@@ -14,6 +15,8 @@ class BarsViewModel(private val repository: DataRepository): ViewModel() {
 
     val loading = MutableLiveData(false)
     val bars = MutableLiveData<String>(null)
+    val coords = MutableLiveData<Coords>(null)
+
 
 
 //    val bars: LiveData<List<Bar>?> =

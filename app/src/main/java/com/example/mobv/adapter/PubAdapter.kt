@@ -14,6 +14,7 @@ import com.example.mobv.model.Bar
 import com.example.mobv.model.Pub
 import kotlinx.android.synthetic.main.fragment_list_pub.view.*
 import kotlinx.android.synthetic.main.list_item_pub.view.*
+import kotlin.math.roundToInt
 
 /**
  * Adapter for the [RecyclerView] in [ListPubnFragment]. Displays [Pub] data object.
@@ -49,7 +50,9 @@ class PubAdapter (
      */
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = data[position]
-        val text = "${item.bar_name} \n users: ${item.users}"
+        val text = "${item.bar_name} \n " +
+                "users: ${item.users} \n " +
+                "distance: ${item.disFromLastPosition?.roundToInt()?.div(1000)} km"
         holder.textView.text =  text
         holder.textView.setOnClickListener {
             (holder.textView.setTextColor(Color.GREEN))
