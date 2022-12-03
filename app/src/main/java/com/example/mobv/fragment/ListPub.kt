@@ -129,7 +129,6 @@ class ListPub : Fragment() {
 
         swiperefresh.setOnRefreshListener {
             getGpsLocation()
-            swiperefresh.isRefreshing = false
         }
 
         viewmodel.coords.observe(viewLifecycleOwner){
@@ -144,7 +143,7 @@ class ListPub : Fragment() {
             if (it != null && it.equals("Success")) {
 
                 BarsSingleton.initDistance(viewmodel.coords.value?.lat!!, viewmodel.coords.value?.lon!!)
-
+                swiperefresh.isRefreshing = false
                 if (binding.ListPubRecyclerView.adapter != null){
                     val adapter = binding.ListPubRecyclerView.adapter!! as PubAdapter
                     adapter.update(BarsSingleton.bars!!)

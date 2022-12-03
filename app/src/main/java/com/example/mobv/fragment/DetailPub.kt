@@ -33,16 +33,26 @@ class DetailPub : Fragment() {
         // Receive the arguments in a variable
         val pub = args.bar
 
+        val latitudeString = pub.lat.toString()
+        val longitudeString = pub.lon.toString()
+
         // set the values to respective textViews
         binding.detailPubPubNameValue.text = pub.bar_name.toString()
         binding.detailPubWebsiteValue.text = pub.bar_type.toString()
         binding.detailPubPhoneNumberValue.text = pub.users.toString()
-
-        val latitudeString = pub.lat.toString()
-        val longitudeString = pub.lon.toString()
-
         binding.detailPubLatitudeValue.text = latitudeString
         binding.detailPubLongitudeValue.text = longitudeString
+
+//        hide null value fields
+        if (pub.bar_type == null){
+            binding.detailPubWebsiteValue.visibility = View.GONE
+            binding.detailPubWebsite.visibility = View.GONE
+        }
+        if (pub.users == null){
+            binding.detailPubPhoneNumberValue.visibility = View.GONE
+            binding.detailPubPhoneNumber.visibility = View.GONE
+        }
+
 
         binding.buttonShowMap.setOnClickListener{
             val packageManager = requireActivity().packageManager
