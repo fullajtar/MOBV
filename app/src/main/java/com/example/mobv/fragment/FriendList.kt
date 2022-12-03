@@ -1,24 +1,19 @@
 package com.example.mobv.fragment
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.mobv.adapter.FriendAdapter
-
 import com.example.mobv.databinding.FragmentFriendListBinding
 import com.example.mobv.helper.Injection
 import com.example.mobv.model.FriendsSingleton
-
 import com.example.mobv.viewmodel.FriendViewModel
 import kotlinx.android.synthetic.main.fragment_friend_list.*
-import kotlinx.android.synthetic.main.fragment_list_pub.*
-import kotlinx.android.synthetic.main.fragment_list_pub.view.*
 
 
 class FriendList : Fragment() {

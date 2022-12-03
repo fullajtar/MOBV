@@ -9,6 +9,7 @@ import com.example.mobv.api.*
 import com.example.mobv.model.Bar
 import com.example.mobv.model.BarsSingleton
 import com.example.mobv.model.FriendsSingleton
+import com.example.mobv.model.Pubs
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -79,28 +80,25 @@ class DataRepository private constructor(
         }
     }
 
-//    suspend fun apiBarCheckin(
-//        bar: NearbyBar,
-//        onError: (error: String) -> Unit,
-//        onSuccess: (success: Boolean) -> Unit
-//    ) {
-//        try {
-//            val resp = service.barMessage(BarMessageRequest(bar.id.toString(),bar.name,bar.type,bar.lat,bar.lon))
-//            if (resp.isSuccessful) {
-//                resp.body()?.let { user ->
-//                    onSuccess(true)
-//                }
-//            } else {
-//                onError("Failed to login, try again later.")
-//            }
-//        } catch (ex: IOException) {
-//            ex.printStackTrace()
-//            onError("Login failed, check internet connection")
-//        } catch (ex: Exception) {
-//            ex.printStackTrace()
-//            onError("Login in failed, error.")
-//        }
-//    }
+    suspend fun apiBarCheckin(
+        bar: BodyCheckInBar,
+        context: Context
+    ) {
+        try {
+            val resp = service.checkInBar(bar)
+            if (resp.isSuccessful) {
+                resp.body()?.let { user ->
+                    Toast.makeText(context ,"Checked in successfully", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(context ,"Check in failed!", Toast.LENGTH_SHORT).show()
+            }
+        } catch (ex: IOException) {
+            ex.printStackTrace()
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
+    }
 
     suspend fun apiBarList(): String {
         try {
@@ -135,35 +133,34 @@ class DataRepository private constructor(
         return "Failure"
     }
 
-//    suspend fun apiNearbyBars(
-//        lat: Double, lon: Double,
-//        onError: (error: String) -> Unit
-//    ) : List<NearbyBar> {
-//        var nearby = listOf<NearbyBar>()
-//        try {
-//            val q = "[out:json];node(around:250,$lat,$lon);(node(around:250)[\"amenity\"~\"^pub$|^bar$|^restaurant$|^cafe$|^fast_food$|^stripclub$|^nightclub$\"];);out body;>;out skel;"
-//            val resp = service.barNearby(q)
-//            if (resp.isSuccessful) {
-//                resp.body()?.let { bars ->
+    suspend fun apiNearbyBars(
+        lat: Double, lon: Double,
+    ) :Pubs{
+        var nearby = Pubs()
+        try {
+            val q = "[out:json];node(around:250,$lat,$lon);(node(around:250)[\"amenity\"~\"^pub$|^bar$|^restaurant$|^cafe$|^fast_food$|^stripclub$|^nightclub$\"];);out body;>;out skel;"
+            val resp = service.barNearby(q)
+            if (resp.isSuccessful) {
+                resp.body()?.let {
+                    nearby = it
+//                        bars ->
 //                    nearby = bars.elements.map {
 //                        NearbyBar(it.id,it.tags.getOrDefault("name",""), it.tags.getOrDefault("amenity",""),it.lat,it.lon,it.tags).apply {
 //                            distance = distanceTo(MyLocation(lat,lon))
 //                        }
 //                    }
 //                    nearby = nearby.filter { it.name.isNotBlank() }.sortedBy { it.distance }
-//                } ?: onError("Failed to load bars")
-//            } else {
-//                onError("Failed to read bars")
-//            }
-//        } catch (ex: IOException) {
-//            ex.printStackTrace()
-//            onError("Failed to load bars, check internet connection")
-//        } catch (ex: Exception) {
-//            ex.printStackTrace()
-//            onError("Failed to load bars, error.")
-//        }
-//        return nearby
-//    }
+                }
+                Log.d("testingOut: ", "Nearby bars response: ${resp.code()} ${resp.body()}")
+                Log.d("testingOut: ", "nearby: ${nearby}")
+            }
+        } catch (ex: IOException) {
+            ex.printStackTrace()
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
+        return nearby
+    }
 //
 //    suspend fun apiBarDetail(
 //        id: String,

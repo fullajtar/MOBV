@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.mobv.DataRepository
 import com.example.mobv.viewmodel.AuthViewModel
 import com.example.mobv.viewmodel.BarsViewModel
+import com.example.mobv.viewmodel.CheckIntoBarViewModel
 import com.example.mobv.viewmodel.FriendViewModel
 
 class ViewModelFactory(private val repository: DataRepository) : ViewModelProvider.Factory {
@@ -23,6 +24,11 @@ class ViewModelFactory(private val repository: DataRepository) : ViewModelProvid
         if (modelClass.isAssignableFrom(FriendViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return FriendViewModel(repository) as T
+        }
+
+        if (modelClass.isAssignableFrom(CheckIntoBarViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return CheckIntoBarViewModel(repository) as T
         }
 //
 //        if (modelClass.isAssignableFrom(LocateViewModel::class.java)) {

@@ -26,6 +26,9 @@
         <action
             android:id="@+id/action_listPub_to_friendList"
             app:destination="@id/friendList" />
+        <action
+            android:id="@+id/action_listPub_to_checkIntoBar"
+            app:destination="@id/checkIntoBar" />
     </fragment>
 
     <fragment
@@ -102,6 +105,18 @@
         <action
             android:id="@+id/action_addFriend_to_friendList"
             app:destination="@id/friendList" />
+    </fragment>
+    <fragment
+        android:id="@+id/checkIntoBar"
+        android:name="com.example.mobv.fragment.CheckIntoBar"
+        android:label="fragment_check_into_bar"
+        tools:layout="@layout/fragment_check_into_bar" >
+        <action
+            android:id="@+id/action_checkIntoBar_to_listPub"
+            app:destination="@id/listPub" />
+        <action
+            android:id="@+id/action_checkIntoBar_self"
+            app:destination="@id/checkIntoBar" />
     </fragment>
 
 </navigation>

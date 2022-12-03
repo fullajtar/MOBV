@@ -1,7 +1,10 @@
 package com.example.mobv.model
 
 import android.os.Parcelable
+import android.util.Log
 import com.example.mobv.api.FriendResponse
+import com.google.android.gms.maps.model.LatLng
+import com.google.maps.android.SphericalUtil
 import kotlinx.android.parcel.Parcelize
 
 object PubsSingleton{
@@ -19,7 +22,8 @@ data class Tags(
     var opening_hours: String? = null,
 //    var opening_hourscovid19: String? = null,
     var website: String? = null,
-    var phone: String? = null
+    var phone: String? = null,
+    val amenity: String? = null
 
 
 ): Parcelable
@@ -29,11 +33,51 @@ data class Pub (
     val id: Number? = null,
     var lat: Number? = null,
     var lon: Number? = null,
-    var tags: Tags? = null
+    var tags: Tags? = null,
+    var disFromLastPosition: Double? = null
 ): Parcelable
+
+data class Coords (
+    val lat: Double? = null,
+    val lon: Double? = null
+){}
 
 object FriendsSingleton{
     var friends: MutableList<FriendResponse>? = null
+}
+
+object CloseBarsSingleton{
+    var bars: MutableList<Pub>? = null
+
+    fun purge(){
+        val purgedBars = MutableList<Pub>(0) {Pub()}
+        bars!!.forEach {
+            if (it.tags?.name != null){
+                Log.d("testingOut: ", "ID: ${it.id}")
+                purgedBars.add(it)
+            }
+        }
+        bars = purgedBars
+    }
+
+    private fun initDistance(lat: Double, lon: Double) {
+        bars!!.forEach {
+            if (it.tags?.name != null){
+                val distance = SphericalUtil.computeDistanceBetween(
+                    LatLng(lat, lon),
+                    LatLng(it.lat!!.toDouble(), it.lon!!.toDouble())
+                )
+                it.disFromLastPosition = distance
+            }
+        }
+    }
+
+    fun sortByDistance(lat: Double, lon: Double){
+        initDistance(lat, lon)
+        bars!!.sortBy { it.disFromLastPosition }
+    }
+
+
 }
 
 object BarsSingleton{

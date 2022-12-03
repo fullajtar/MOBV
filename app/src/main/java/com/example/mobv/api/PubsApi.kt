@@ -2,6 +2,8 @@ package com.example.mobv.api
 
 import android.content.Context
 import com.example.mobv.BuildConfig
+import com.example.mobv.model.Bar
+import com.example.mobv.model.Pubs
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Response
@@ -41,6 +43,13 @@ interface PubsApi {
     @GET("contact/list.php")
     @Headers("mobv-auth: accept")
     suspend fun getFriendList() : Response<List<FriendResponse>>
+
+    @GET("https://overpass-api.de/api/interpreter?")
+    suspend fun barNearby(@Query("data") data: String): Response<Pubs>
+
+    @POST("bar/message.php")
+    @Headers("mobv-auth: accept")
+    suspend fun checkInBar(@Body bar: BodyCheckInBar) : Response<Any>
 
     companion object{
         const val baseUrl = "https://zadanie.mpage.sk/"

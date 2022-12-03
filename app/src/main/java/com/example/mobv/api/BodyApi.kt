@@ -16,3 +16,11 @@ data class UserRefreshRequest(
 data class BodyAddFriend(
     val contact: String
 ){}
+
+data class BodyCheckInBar(
+    val id: String?,
+    val name: String?,
+    val type: String?,
+    val lat: Double? = 3.3,
+    val lon: Double? = 33.3
+)

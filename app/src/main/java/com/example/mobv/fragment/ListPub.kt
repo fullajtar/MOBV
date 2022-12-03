@@ -96,6 +96,12 @@ class ListPub : Fragment() {
             )
         }
 
+        binding.listPubButtonCheckIntoBar.setOnClickListener{
+            findNavController().navigate(
+                ListPubDirections.actionListPubToCheckIntoBar()
+            )
+        }
+
         swiperefresh.setOnRefreshListener {
             viewmodel.refreshData()
             swiperefresh.isRefreshing = false
