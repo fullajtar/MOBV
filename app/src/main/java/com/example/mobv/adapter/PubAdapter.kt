@@ -23,6 +23,7 @@ class PubAdapter (
     private val dataset: List<Bar>,
     private val findNavController: NavController
 ) : RecyclerView.Adapter<PubAdapter.ItemViewHolder>() {
+    private var data: List<Bar> = dataset
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -47,7 +48,7 @@ class PubAdapter (
      * Replace the contents of a view (invoked by the layout manager)
      */
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val item = dataset[position]
+        val item = data[position]
         val text = "${item.bar_name} \n users: ${item.users}"
         holder.textView.text =  text
         holder.textView.setOnClickListener {
@@ -62,6 +63,10 @@ class PubAdapter (
     /**
      * Return the size of your dataset (invoked by the layout manager)
      */
-    override fun getItemCount() = dataset.size
+    override fun getItemCount() = data.size
 
+    fun update(dataset: List<Bar>){
+        data = dataset
+        notifyDataSetChanged()
+    }
 }

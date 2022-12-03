@@ -39,18 +39,7 @@ class ListPub : Fragment() {
     ): View {
         _binding = FragmentListPubBinding.inflate(inflater, container, false)
         val view = binding.root
-
-        if (BarsSingleton.bars != null){
-            BarsSingleton.sortBy()
-            binding.ListPubRecyclerView.ListPub_recyclerView.adapter = PubAdapter(requireContext(), BarsSingleton.bars!!,findNavController())
-
-            // Use this setting to improve performance if you know that changes
-            // in content do not change the layout size of the RecyclerView
-            binding.ListPubRecyclerView.ListPub_recyclerView.setHasFixedSize(true)
-        }
-        else{
-            viewmodel.refreshData()
-        }
+        viewmodel.refreshData()
         return view
     }
 
@@ -108,10 +97,17 @@ class ListPub : Fragment() {
         }
 
         viewmodel.bars.observe(viewLifecycleOwner) {
-            if (it != null && it.equals("Success"))
-                findNavController().navigate(
-                    ListPubDirections.actionListPubToListPub()
-                )
+            if (it != null && it.equals("Success")) {
+                BarsSingleton.sortBy()
+
+                if (binding.ListPubRecyclerView.adapter != null){
+                    val adapter = binding.ListPubRecyclerView.adapter!! as PubAdapter
+                    adapter.update(BarsSingleton.bars!!)
+                } else{
+                    binding.ListPubRecyclerView.adapter = PubAdapter(requireContext(), BarsSingleton.bars!!,findNavController())
+                    binding.ListPubRecyclerView.setHasFixedSize(true)
+                }
+            }
             else if (it != null && it.equals("Failure")){
                 Toast.makeText(activity,"Error loading data!", Toast.LENGTH_SHORT).show()
             }

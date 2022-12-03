@@ -13,6 +13,7 @@ import com.example.mobv.R
 import com.example.mobv.api.FriendResponse
 import com.example.mobv.fragment.FriendListDirections
 import com.example.mobv.model.Bar
+import com.example.mobv.model.Pub
 import com.example.mobv.viewmodel.FriendViewModel
 import kotlinx.android.synthetic.main.fragment_friend_list.view.*
 import kotlinx.android.synthetic.main.list_item_friend.view.*
@@ -24,6 +25,7 @@ class FriendAdapter(
     private val dataset: List<FriendResponse>,
     private val findNavController: NavController
 ) : RecyclerView.Adapter<FriendAdapter.ItemViewHolder>() {
+    private var data: List<FriendResponse> = dataset
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -48,7 +50,7 @@ class FriendAdapter(
      * Replace the contents of a view (invoked by the layout manager)
      */
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val item = dataset[position]
+        val item = data[position]
         val text = "${item.user_name} \n bar: ${item.bar_name}"
         holder.textView.text =  text
         holder.textView.setOnClickListener {
@@ -71,6 +73,11 @@ class FriendAdapter(
     /**
      * Return the size of your dataset (invoked by the layout manager)
      */
-    override fun getItemCount() = dataset.size
+    override fun getItemCount() = data.size
+
+    fun update(dataset: List<FriendResponse>){
+        data = dataset
+        notifyDataSetChanged()
+    }
 
 }

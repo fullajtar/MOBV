@@ -36,17 +36,7 @@ class FriendList : Fragment() {
     ): View {
         _binding = FragmentFriendListBinding.inflate(inflater, container, false)
         val view = binding.root
-
-        if (FriendsSingleton.friends != null){
-            binding.FriendListRecyclerView.adapter = FriendAdapter(requireContext(), FriendsSingleton.friends!!, findNavController())
-
-            // Use this setting to improve performance if you know that changes
-            // in content do not change the layout size of the RecyclerView
-            binding.FriendListRecyclerView.setHasFixedSize(true)
-        }
-        else{
-            viewmodel.getFriendList(requireContext())
-        }
+        viewmodel.getFriendList(requireContext())
         return view
     }
 
@@ -64,10 +54,15 @@ class FriendList : Fragment() {
         }
 
         viewmodel.friends.observe(viewLifecycleOwner){
-            if (it != null && it.equals("Success"))
-                findNavController().navigate(
-                    FriendListDirections.actionFriendListSelf()
-                )
+            if (it != null && it.equals("Success")){
+                if (binding.FriendListRecyclerView.adapter != null){
+                    val adapter = binding.FriendListRecyclerView.adapter as FriendAdapter
+                    adapter.update(FriendsSingleton.friends!!)
+                } else {
+                    binding.FriendListRecyclerView.adapter = FriendAdapter(requireContext(), FriendsSingleton.friends!!, findNavController())
+                    binding.FriendListRecyclerView.setHasFixedSize(true)
+                }
+            }
             else if (it != null && it.equals("Failure")){
                 Toast.makeText(activity,"Error loading data!", Toast.LENGTH_SHORT).show()
             }
