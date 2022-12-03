@@ -128,7 +128,7 @@ object BarsSingleton{
         else if (sortBy.equals("ascending")){
             sortBy = "descending"
         }
-        else if (sortBy.equals("descending")){
+        else{
             sortBy = "ascending"
         }
         sortBy()
@@ -141,7 +141,7 @@ object BarsSingleton{
         else if (sortBy.equals("ascendingUsers")){
             sortBy = "descendingUsers"
         }
-        else if (sortBy.equals("descendingUsers")){
+        else{
             sortBy = "ascendingUsers"
         }
         sortBy()
@@ -154,7 +154,7 @@ object BarsSingleton{
         else if (sortBy.equals("ascendingDistance")){
             sortBy = "descendingDistance"
         }
-        else if (sortBy.equals("descendingDistance")){
+        else{
             sortBy = "ascendingDistance"
         }
         sortBy()

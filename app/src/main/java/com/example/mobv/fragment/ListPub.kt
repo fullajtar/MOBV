@@ -74,16 +74,22 @@ class ListPub : Fragment() {
 
         binding.listPubButtonSortUsers.setOnClickListener{
             BarsSingleton.toggleSortByUsers()
-            findNavController().navigate(
-                ListPubDirections.actionListPubToListPub()
-            )
+            if (binding.ListPubRecyclerView.adapter != null){
+                val adapter = binding.ListPubRecyclerView.adapter!! as PubAdapter
+                adapter.update(BarsSingleton.bars!!)
+            } else {
+                Toast.makeText(activity,"Bars loading, please try again later.", Toast.LENGTH_SHORT).show()
+            }
         }
 
         binding.listPubButtonSort.setOnClickListener{
-            BarsSingleton.toggleSortByUsers()
-            findNavController().navigate(
-                ListPubDirections.actionListPubToListPub()
-            )
+            BarsSingleton.toggleSortByName()
+            if (binding.ListPubRecyclerView.adapter != null){
+                val adapter = binding.ListPubRecyclerView.adapter!! as PubAdapter
+                adapter.update(BarsSingleton.bars!!)
+            } else {
+                Toast.makeText(activity,"Bars loading, please try again later.", Toast.LENGTH_SHORT).show()
+            }
         }
 
         binding.listPubButtonSortDistance.setOnClickListener{
@@ -94,7 +100,6 @@ class ListPub : Fragment() {
             } else {
                 Toast.makeText(activity,"Bars loading, please try again later.", Toast.LENGTH_SHORT).show()
             }
-
         }
 
         binding.listPubButtonAdd.setOnClickListener{
