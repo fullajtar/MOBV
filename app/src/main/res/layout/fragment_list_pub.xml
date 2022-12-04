@@ -8,7 +8,7 @@
             name="model"
             type="com.example.mobv.viewmodel.BarsViewModel" />
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".fragment.ListPub">
@@ -18,36 +18,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sort: Name"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="3dp"/>
         <Button
             android:id="@+id/listPub_buttonSortUsers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sort: Users"
-            app:layout_constraintEnd_toStartOf="@id/listPub_buttonSortDistance"
-            app:layout_constraintStart_toEndOf="@id/listPub_buttonSort"
-            app:layout_constraintTop_toTopOf="parent" />
-
+            android:layout_toEndOf="@+id/listPub_buttonSort"
+            android:layout_marginEnd="3dp"/>
         <Button
             android:id="@+id/listPub_buttonSortDistance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sort: Distance"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/listPub_buttonSortUsers"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_toEndOf="@id/listPub_buttonSortUsers"
+            android:layout_marginEnd="3dp"/>
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swiperefresh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/listPub_buttonSort"
-            app:layout_constraintBottom_toTopOf="@id/listPub_buttonSignOut"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-
+            android:layout_below="@id/listPub_buttonSortUsers"
+            android:layout_above="@id/listPub_buttonSignOut">
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/ListPub_recyclerView"
                 android:layout_width="match_parent"
@@ -56,52 +49,47 @@
                 android:layout_margin="20dp"
                 android:scrollbars="vertical"
                 app:layoutManager="LinearLayoutManager"
-                app:layout_constraintTop_toBottomOf="@id/listPub_buttonSort"
-                app:layout_constraintBottom_toBottomOf="@id/listPub_buttonSignOut"
-
                 tools:layout_editor_absoluteX="20dp" />
-
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-
-
-        <Button
-            android:id="@+id/listPub_buttonFriendsList"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
-            android:text="Friends List"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/listPub_buttonCheckIntoBar"
-            app:layout_constraintStart_toEndOf="@id/listPub_buttonSignOut"
-            />
-        <Button
-            android:id="@+id/listPub_buttonCheckIntoBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
-            android:text="Check Into Bar"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/listPub_buttonFriendsList"
-            app:layout_constraintEnd_toStartOf="@id/listPub_buttonAdd"
-            />
         <Button
             android:id="@+id/listPub_buttonSignOut"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sign Out"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginEnd="3dp"
+            android:layout_marginStart="3dp"
+            />
+        <Button
+            android:id="@+id/listPub_buttonFriendsList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="3dp"
+            android:text="Friends List"
+            android:layout_toEndOf="@id/listPub_buttonSignOut"
+            android:layout_alignParentBottom="true"
+            />
+        <Button
+            android:id="@+id/listPub_buttonCheckIntoBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="3dp"
+            android:text="Check Into Bar"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@id/listPub_buttonFriendsList"
+            />
         <Button
             android:id="@+id/listPub_buttonAdd"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
             android:text="+"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@id/listPub_buttonCheckIntoBar"
             />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 
 </layout>

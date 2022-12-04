@@ -51,10 +51,13 @@ class NearbyBarAdapter(
      */
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         if (position == selectedItemPos){
-            (holder.textView.setTextColor(Color.GREEN))
+//            (holder.textView.setTextColor(Color.GREEN))
+            (holder.textView.setBackgroundColor(Color.GRAY))
         }
         else{
-            (holder.textView.setTextColor(Color.WHITE))
+//            (holder.textView.setTextColor(Color.WHITE))
+            (holder.textView.setBackgroundColor(Color.CYAN))
+
         }
         val item = data[position]
         if (item.tags?.name != null) {

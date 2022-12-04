@@ -143,7 +143,6 @@ class ListPub : Fragment() {
             if (it != null && it.equals("Success")) {
 
                 BarsSingleton.initDistance(viewmodel.coords.value?.lat!!, viewmodel.coords.value?.lon!!)
-                swiperefresh.isRefreshing = false
                 if (binding.ListPubRecyclerView.adapter != null){
                     val adapter = binding.ListPubRecyclerView.adapter!! as PubAdapter
                     adapter.update(BarsSingleton.bars!!)
@@ -151,6 +150,7 @@ class ListPub : Fragment() {
                     binding.ListPubRecyclerView.adapter = PubAdapter(requireContext(), BarsSingleton.bars!!,findNavController())
                     binding.ListPubRecyclerView.setHasFixedSize(true)
                 }
+                swiperefresh.isRefreshing = false
             }
             else if (it != null && it.equals("Failure")){
                 Toast.makeText(activity,"Error loading data!", Toast.LENGTH_SHORT).show()

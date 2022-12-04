@@ -2,24 +2,23 @@ package com.example.mobv.fragment
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.mobv.R
-import com.example.mobv.api.PubsApi
-import com.example.mobv.databinding.FragmentNewPubBinding
 import com.example.mobv.databinding.FragmentSignInBinding
-import com.example.mobv.databinding.FragmentSignUpBinding
+import com.example.mobv.helper.HashPassword.hashPassword
 import com.example.mobv.helper.Injection
 import com.example.mobv.helper.PreferenceData
 import com.example.mobv.viewmodel.AuthViewModel
-import kotlinx.coroutines.launch
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
+import kotlin.experimental.and
 
 class SignIn : Fragment() {
     private var _binding: FragmentSignInBinding? = null
@@ -67,16 +66,18 @@ class SignIn : Fragment() {
         }
 
         binding.buttonSignIn.setOnClickListener{
-            if (binding.signinUsername.text.toString().isNotBlank() && binding.signinPassword.text.toString().isNotBlank()) {
+            val hashedpassword = hashPassword(binding.signinPassword.text.toString())
+            if (binding.signinUsername.text.toString().isNotBlank() && binding.signinPassword.text.toString().isNotBlank() && hashedpassword != null) {
+
                 authViewModel.signin(
                     binding.signinUsername.text.toString(),
-                    binding.signinPassword.text.toString(),
+                    hashedpassword,
                     requireContext()
                 )
             } else if (binding.signinUsername.text.toString().isBlank() || binding.signinPassword.text.toString().isBlank()){
                 Toast.makeText(activity,"Fill in name and password", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(activity,"Passwords must be matching", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity,"Error", Toast.LENGTH_SHORT).show()
             }
         }
 

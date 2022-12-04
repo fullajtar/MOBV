@@ -8,7 +8,7 @@
             name="model"
             type="com.example.mobv.viewmodel.CheckIntoBarViewModel" />
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".fragment.CheckIntoBar">
@@ -17,16 +17,18 @@
             android:id="@+id/CheckIntoBar_animationView"
             android:layout_width="366dp"
             android:layout_height="353dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintVertical_bias="0.333"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/summer_drink"
-            app:layout_constraintTop_toTopOf="parent"
             app:lottie_speed="3"
-            app:layout_constraintBottom_toBottomOf="@id/checkIntoBar_buttonRefreshLocation"/>
-
+            android:layout_centerInParent="true"/>
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swiperefresh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:layout_above="@id/checkIntoBar_buttonCheckIn"
+            >
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/CheckIntoBar_recyclerView"
             android:layout_width="match_parent"
@@ -35,28 +37,19 @@
             android:layout_margin="20dp"
             android:scrollbars="vertical"
             app:layoutManager="LinearLayoutManager"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/checkIntoBar_buttonRefreshLocation"
-
             tools:layout_editor_absoluteX="20dp" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-        <Button
-            android:id="@+id/checkIntoBar_buttonRefreshLocation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/checkIntoBar_buttonCheckIn"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="65dp"
             android:text="Check In"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/checkIntoBar_buttonRefreshLocation" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_margin="3dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            />
+    </RelativeLayout>
 
 </layout>

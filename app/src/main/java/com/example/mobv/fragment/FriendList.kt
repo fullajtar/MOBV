@@ -50,7 +50,6 @@ class FriendList : Fragment() {
 
         swiperefreshFriends.setOnRefreshListener {
             viewmodel.getFriendList(requireContext())
-            swiperefreshFriends.isRefreshing = false
         }
 
         viewmodel.friends.observe(viewLifecycleOwner){
@@ -62,6 +61,7 @@ class FriendList : Fragment() {
                     binding.FriendListRecyclerView.adapter = FriendAdapter(requireContext(), FriendsSingleton.friends!!, findNavController())
                     binding.FriendListRecyclerView.setHasFixedSize(true)
                 }
+                swiperefreshFriends.isRefreshing = false
             }
             else if (it != null && it.equals("Failure")){
                 Toast.makeText(activity,"Error loading data!", Toast.LENGTH_SHORT).show()

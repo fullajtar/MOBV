@@ -29,6 +29,7 @@ import com.example.mobv.model.CloseBarsSingleton
 import com.example.mobv.model.Coords
 import com.example.mobv.viewmodel.CheckIntoBarViewModel
 import com.google.android.gms.location.*
+import kotlinx.android.synthetic.main.fragment_list_pub.*
 
 class CheckIntoBar : Fragment() {
 
@@ -76,7 +77,7 @@ class CheckIntoBar : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.checkIntoBarButtonRefreshLocation.setOnClickListener{
+        swiperefresh.setOnRefreshListener {
             loadData()
         }
 
@@ -108,12 +109,8 @@ class CheckIntoBar : Fragment() {
             Log.d("testingOut: ", "viewmodel bars CHANGED!")
             it?.let{
                 if (it.elements != null){
-                    Log.d("testingOut: ", "viewmodel bars is not null!")
                     CloseBarsSingleton.bars = it.elements
-
                     CloseBarsSingleton.purge()
-                    CloseBarsSingleton.sortByDistance(viewmodel.coords.value?.lat!!, viewmodel.coords.value?.lon!!)
-
                     if (viewmodel.coords.value?.lat != null && viewmodel.coords.value?.lon != null){
                         CloseBarsSingleton.sortByDistance(viewmodel.coords.value!!.lat!!, viewmodel.coords.value!!.lon!!)
                     }
@@ -135,6 +132,7 @@ class CheckIntoBar : Fragment() {
                         // in content do not change the layout size of the RecyclerView
                         binding.CheckIntoBarRecyclerView.setHasFixedSize(true)
                     }
+                    swiperefresh.isRefreshing = false
                 }
                 else{
                     Log.d("testingOut: ", "viewmodel bars is null!")

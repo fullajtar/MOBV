@@ -14,6 +14,7 @@ import com.example.mobv.R
 import com.example.mobv.api.BodyGetAllPubs
 import com.example.mobv.databinding.FragmentSignInBinding
 import com.example.mobv.databinding.FragmentSignUpBinding
+import com.example.mobv.helper.HashPassword
 import com.example.mobv.helper.Injection
 import com.example.mobv.helper.PreferenceData
 import com.example.mobv.viewmodel.AuthViewModel
@@ -67,13 +68,16 @@ class SignUp : Fragment() {
 
         binding.buttonSignUp.setOnClickListener{
             Log.d("GameFragment", "You re logged in already")
+            val hashedpassword = HashPassword.hashPassword(binding.signupPassword.text.toString())
 
             if (binding.signupUsername.text.toString().isNotBlank() && binding.signupPassword.text.toString().isNotBlank()
-                && binding.signupPassword.text.toString().compareTo(binding.signupPassword2.text.toString())==0) {
+                && binding.signupPassword.text.toString().compareTo(binding.signupPassword2.text.toString())==0
+                && hashedpassword != null
+            ) {
                 Log.d("GameFragment", "First IF")
                 authViewModel.signup(
                     binding.signupUsername.text.toString(),
-                    binding.signupPassword.text.toString(),
+                    hashedpassword,
                     requireContext()
                 )
             } else if (binding.signupUsername.text.toString().isBlank() || binding.signupPassword.text.toString().isBlank()){

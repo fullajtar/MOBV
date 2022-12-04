@@ -7,6 +7,7 @@ import android.content.Intent
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.WorkRequest
+import com.example.zadanie.workers.CheckoutWorker
 import com.google.android.gms.location.Geofence
 import com.google.android.gms.location.GeofenceStatusCodes
 import com.google.android.gms.location.GeofencingEvent
@@ -33,11 +34,11 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
             triggeringGeofences?.forEach {
                 if (it.requestId.compareTo("mygeofence") == 0) {
                     context?.let { context ->
-//                        val uploadWorkRequest: WorkRequest =
-//                            OneTimeWorkRequestBuilder<CheckoutWorker>()
-//                                .build()
+                        val uploadWorkRequest: WorkRequest =
+                            OneTimeWorkRequestBuilder<CheckoutWorker>()
+                                .build()
                         WorkManager
-                            .getInstance(context)
+                            .getInstance(context).enqueue(uploadWorkRequest)
                     }
                 }
             }
