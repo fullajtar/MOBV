@@ -4,6 +4,7 @@ package com.example.mobv
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.WorkRequest
@@ -17,6 +18,8 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
         val geofencingEvent = intent?.let { GeofencingEvent.fromIntent(it) }
         if (geofencingEvent != null) {
             if (geofencingEvent.hasError()) {
+                Log.d("geofenceTesting: ", "fence had error")
+
                 val errorMessage = GeofenceStatusCodes
                     .getStatusCodeString(geofencingEvent.errorCode)
                 return
@@ -24,12 +27,15 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
         } else {
             return
         }
+        Log.d("geofenceTesting: ", "here!")
 
         // Get the transition type.
         val geofenceTransition = geofencingEvent.geofenceTransition
 
         // Test that the reported transition was of interest.
         if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT) {
+            Log.d("geofenceTesting: ", "transition exit match")
+
             val triggeringGeofences = geofencingEvent.triggeringGeofences
             triggeringGeofences?.forEach {
                 if (it.requestId.compareTo("mygeofence") == 0) {
@@ -43,5 +49,7 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
                 }
             }
         }
+        Log.d("geofenceTesting: ", "transition exit NOT match")
+
     }
 }

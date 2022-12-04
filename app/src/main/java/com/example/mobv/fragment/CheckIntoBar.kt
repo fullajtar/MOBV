@@ -7,16 +7,21 @@ import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.app.PendingIntent
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.location.LocationManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -42,6 +47,21 @@ class CheckIntoBar : Fragment() {
     private val REQUEST_FOREGROUND_AND_BACKGROUND_PERMISSION_RESULT_CODE = 3 // random unique value
     private val REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE = 4
     private val REQUEST_TURN_DEVICE_LOCATION_ON = 5
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    private val locationPermissionRequest = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        when {
+            permissions.getOrDefault(Manifest.permission.ACCESS_BACKGROUND_LOCATION, false) -> {
+                // Precise location access granted.
+            }
+            else -> {
+                Log.d("geofenceTesting: ", "background permission denied")
+                // No location access granted.
+            }
+        }
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,6 +104,16 @@ class CheckIntoBar : Fragment() {
         binding.checkIntoBarButtonCheckIn.setOnClickListener {
             Log.d("testingOut: ", "check in initiated")
             Log.d("testingOut: ", "viewmodel coords value: ${viewmodel.coords.value}")
+
+            if (checkBackgroundPermissions()) {
+                Log.d("geofenceTesting: ", "background permission granted")
+
+            } else {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    permissionDialog()
+                }
+            }
+
             viewmodel.coords.value?.let {
                 Log.d("testingOut: ", "coords not null")
                 viewmodel.checkInBar(requireContext())
@@ -143,10 +173,47 @@ class CheckIntoBar : Fragment() {
         askLocationPermission()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        CloseBarsSingleton.bars = null
-        _binding = null
+//    override fun onDestroyView() {
+//        super.onDestroyView()
+//        CloseBarsSingleton.bars = null
+//        _binding = null
+//    }
+
+    @RequiresApi(Build.VERSION_CODES.Q)
+    private fun permissionDialog() {
+        val alertDialog: AlertDialog = requireActivity().let {
+            val builder = AlertDialog.Builder(it)
+            builder.apply {
+                setTitle("Background location needed")
+                setMessage("Allow background location (All times) for detecting when you leave bar.")
+                setPositiveButton("OK",
+                    DialogInterface.OnClickListener { dialog, id ->
+                        locationPermissionRequest.launch(
+                            arrayOf(
+                                Manifest.permission.ACCESS_BACKGROUND_LOCATION
+                            )
+                        )
+                    })
+                setNegativeButton("Cancel",
+                    DialogInterface.OnClickListener { dialog, id ->
+                        // User cancelled the dialog
+                    })
+            }
+            // Create the AlertDialog
+            builder.create()
+        }
+        alertDialog.show()
+    }
+
+    private fun checkBackgroundPermissions(): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_BACKGROUND_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        } else {
+            return true
+        }
     }
 
     @SuppressLint("MissingPermission")
@@ -245,7 +312,11 @@ class CheckIntoBar : Fragment() {
 
     @SuppressLint("MissingPermission")
     private fun createFence(lat: Double, lon: Double) {
+        Log.d("geofenceTesting: ", "creating fence")
+
         if (!checkPermissions()) {
+            Log.d("geofenceTesting: ", "dont have permission")
+
             Toast.makeText(requireContext(), "Geofence failed, permissions not granted.", Toast.LENGTH_SHORT).show()
         }
         val geofenceIntent = PendingIntent.getBroadcast(
@@ -253,6 +324,8 @@ class CheckIntoBar : Fragment() {
             Intent(requireContext(), GeofenceBroadcastReceiver::class.java),
             PendingIntent.FLAG_UPDATE_CURRENT
         )
+        Log.d("geofenceTesting: ", "fence intent created")
+
 
         val request = GeofencingRequest.Builder().apply {
             addGeofence(
@@ -264,10 +337,14 @@ class CheckIntoBar : Fragment() {
                     .build()
             )
         }.build()
+        Log.d("geofenceTesting: ", "fence request built")
+
 
         geofencingClient.addGeofences(request, geofenceIntent).run {
             addOnSuccessListener {
                 Toast.makeText(requireContext(), "Geofence created successfully.", Toast.LENGTH_LONG).show()
+                Log.d("geofenceTesting: ", "Geofence created successfully.")
+
                 findNavController().navigate(
                     CheckIntoBarDirections.actionCheckIntoBarToListPub()
                 )
