@@ -26,6 +26,7 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.airbnb.lottie.LottieAnimationView
 import com.example.mobv.GeofenceBroadcastReceiver
 import com.example.mobv.adapter.NearbyBarAdapter
 import com.example.mobv.databinding.FragmentCheckIntoBarBinding
@@ -47,6 +48,7 @@ class CheckIntoBar : Fragment() {
     private val REQUEST_FOREGROUND_AND_BACKGROUND_PERMISSION_RESULT_CODE = 3 // random unique value
     private val REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE = 4
     private val REQUEST_TURN_DEVICE_LOCATION_ON = 5
+    private lateinit var progressAnimation: LottieAnimationView
 
     @RequiresApi(Build.VERSION_CODES.N)
     private val locationPermissionRequest = registerForActivityResult(
@@ -83,22 +85,29 @@ class CheckIntoBar : Fragment() {
         _binding = FragmentCheckIntoBarBinding.inflate(inflater, container, false)
         val view = binding.root
 
-            if (checkPermissions()) {
-                loadData()
-            } else {
-                Toast.makeText(context,"Please grant location permission!", Toast.LENGTH_LONG).show()
-                findNavController().navigate(
-                    CheckIntoBarDirections.actionCheckIntoBarToListPub()
-                )
-            }
+
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        progressAnimation = binding.CheckIntoBarProgressAnimation
+        if (checkPermissions()) {
+            loadData()
+        } else {
+            Toast.makeText(context,"Please grant location permission!", Toast.LENGTH_LONG).show()
+            findNavController().navigate(
+                CheckIntoBarDirections.actionCheckIntoBarToListPub()
+            )
+        }
 
         swiperefresh.setOnRefreshListener {
             loadData()
+        }
+
+        binding.CheckIntoBarProgressAnimation.setOnClickListener{
+            Log.d("testingOut: ", "animation clicked, frame: ${progressAnimation.frame}")
+            binding.checkIntoBarButtonCheckIn.callOnClick()
         }
 
         binding.checkIntoBarButtonCheckIn.setOnClickListener {
@@ -126,6 +135,7 @@ class CheckIntoBar : Fragment() {
         }
 
         viewmodel.coords.observe(viewLifecycleOwner){
+            setProgressAnimation(60,90)
             it?.let {
                 if (it.lat != null && it.lon != null){
                     viewmodel.refreshData(it.lat, it.lon)
@@ -136,6 +146,7 @@ class CheckIntoBar : Fragment() {
 
 
         viewmodel.bars.observe(viewLifecycleOwner){
+            setProgressAnimation(90,110)
             Log.d("testingOut: ", "viewmodel bars CHANGED!")
             it?.let{
                 if (it.elements != null){
@@ -144,6 +155,7 @@ class CheckIntoBar : Fragment() {
                     if (viewmodel.coords.value?.lat != null && viewmodel.coords.value?.lon != null){
                         CloseBarsSingleton.sortByDistance(viewmodel.coords.value!!.lat!!, viewmodel.coords.value!!.lon!!)
                     }
+                    setProgressAnimation(110,120)
 
                     if (binding.CheckIntoBarRecyclerView.adapter != null){
                         Log.d("testingOut: ", "bind adapter is not null!")
@@ -178,6 +190,12 @@ class CheckIntoBar : Fragment() {
 //        CloseBarsSingleton.bars = null
 //        _binding = null
 //    }
+
+    private fun setProgressAnimation( start :Int, end :Int){
+        progressAnimation.setMinFrame(start)
+        progressAnimation.setMaxFrame(end)
+        progressAnimation.playAnimation()
+    }
 
     @RequiresApi(Build.VERSION_CODES.Q)
     private fun permissionDialog() {
@@ -218,9 +236,11 @@ class CheckIntoBar : Fragment() {
 
     @SuppressLint("MissingPermission")
     private fun loadData() {
+        setProgressAnimation(1,30)
         if (checkPermissions()) {
 //            viewmodel.loading.postValue(true)
             if (isGpsEnabled()) {
+                setProgressAnimation(30,60)
                 fusedLocationClient.getCurrentLocation(
                     CurrentLocationRequest.Builder().setDurationMillis(30000)
                         .setMaxUpdateAgeMillis(60000).build(), null

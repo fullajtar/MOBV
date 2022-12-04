@@ -22,24 +22,37 @@
             app:lottie_rawRes="@raw/summer_drink"
             app:lottie_speed="3"
             android:layout_centerInParent="true"/>
+
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swiperefresh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="3dp"
             android:layout_above="@id/checkIntoBar_buttonCheckIn"
-            >
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/CheckIntoBar_recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constrainedHeight="true"
-            android:layout_margin="20dp"
-            android:scrollbars="vertical"
-            app:layoutManager="LinearLayoutManager"
-            tools:layout_editor_absoluteX="20dp" />
+            android:layout_margin="3dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/CheckIntoBar_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:scrollbars="vertical"
+                app:layoutManager="LinearLayoutManager"
+                app:layout_constrainedHeight="true"
+                tools:layout_editor_absoluteX="20dp" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/CheckIntoBar_progressAnimation"
+            android:layout_width="366dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/checkIntoBar_buttonCheckIn"
+            android:layout_centerHorizontal="true"
+            app:lottie_progress="0.01"
+            app:lottie_autoPlay="false"
+            app:lottie_loop="false"
+            app:lottie_rawRes="@raw/progress_bar"
+            app:lottie_speed="10"
+            android:layout_margin="3dp"/>
 
         <Button
             android:id="@+id/checkIntoBar_buttonCheckIn"
