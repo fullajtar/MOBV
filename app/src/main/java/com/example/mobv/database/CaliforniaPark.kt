@@ -30,9 +30,14 @@ data class CaliforniaPark(
     @ColumnInfo(name = "type") val type: String
 )
 
-@Entity(tableName = "pub")
+@Entity(tableName = "bar")
 data class PubDB(
-    @PrimaryKey(autoGenerate = true) val id: Int,
-    @ColumnInfo(name = "name") val lon: String,
-    @ColumnInfo(name = "city") val lat: String,
+    @PrimaryKey()
+    @ColumnInfo(name = "id") val id: String,
+    @ColumnInfo(name = "bar_name") val bar_name: String?,
+    @ColumnInfo(name = "lat") val lon: Double?,
+    @ColumnInfo(name = "lon") val lat: Double?,
+    @ColumnInfo(name = "bar_type") val bar_type: String?,
+    @ColumnInfo(name = "users") val users: Int?,
+    @ColumnInfo(name = "bar_distance") val disFromLastPosition: Double?,
 )

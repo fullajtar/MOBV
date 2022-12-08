@@ -112,10 +112,12 @@ class DataRepository private constructor(
                             it.lat,
                             it.lon,
                             it.bar_type,
-                            it.users
+                            it.users,
+                            0.0
                         )
                     }
                     BarsSingleton.bars = b as MutableList<Bar>
+
                     return "Success"
 //                    cache.deleteBars()
 //                    cache.insertBars(b)

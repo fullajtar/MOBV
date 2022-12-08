@@ -19,8 +19,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.mobv.model.Bar
+import com.example.mobv.model.Pubs
 
-@Database(entities = [CaliforniaPark::class, PubDB::class], version = 5, exportSchema = false)
+@Database(entities = [CaliforniaPark::class, PubDB::class], version = 8, exportSchema = false)
 abstract class AppDatabase: RoomDatabase() {
     abstract fun californiaParkDao(): CaliforniaParkDao
 

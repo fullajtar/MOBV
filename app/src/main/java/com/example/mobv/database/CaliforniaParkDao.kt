@@ -15,9 +15,11 @@
  */
 package com.example.sqlbasics
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
+import android.content.Context
+import androidx.lifecycle.LiveData
+import androidx.room.*
+import com.example.mobv.model.Bar
+import java.util.concurrent.Flow
 
 @Dao
 interface CaliforniaParkDao {
@@ -26,8 +28,33 @@ interface CaliforniaParkDao {
     @Query("SELECT * FROM park")
     fun getAll(): List<CaliforniaPark>
 
-    @Insert
+//    @Insert
+//    fun insertAllPubsDB(pubsDB: List<PubDB>)
+//    @Query("SELECT * FROM pub")
+//    fun getAllPubs(): List<PubDB>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAllPubsDB(pubsDB: List<PubDB>)
-    @Query("SELECT * FROM pub")
+    @Query("SELECT * FROM bar")
     fun getAllPubs(): List<PubDB>
+
+    companion object {
+        //.allowMainThreadQueries is ONLY for countQueries,
+        // do not use it anywhere else or it may potentially lock the UI for a long period of time.
+        @Volatile
+        private var INSTANCE: AppDatabase? = null
+        fun getDatabase(context: Context): AppDatabase {
+            return INSTANCE ?: synchronized(this) {
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    AppDatabase::class.java,
+                    "my_database"
+                ).fallbackToDestructiveMigration()
+                    .allowMainThreadQueries()
+                    .build()
+                INSTANCE = instance
+                return instance
+            }
+        }
+    }
 }

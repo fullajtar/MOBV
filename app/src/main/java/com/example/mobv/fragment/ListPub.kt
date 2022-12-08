@@ -16,21 +16,25 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.mobv.adapter.PubAdapter
+import com.example.mobv.database.fromDBtoSingleton
+import com.example.mobv.database.fromSingletonToDB
 import com.example.mobv.databinding.FragmentListPubBinding
 import com.example.mobv.helper.Injection
 import com.example.mobv.helper.PreferenceData
 import com.example.mobv.model.BarsSingleton
 import com.example.mobv.model.Coords
 import com.example.mobv.viewmodel.BarsViewModel
+import com.example.sqlbasics.AppDatabase
 import com.google.android.gms.location.CurrentLocationRequest
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import kotlinx.android.synthetic.main.fragment_list_pub.*
-import kotlinx.android.synthetic.main.fragment_list_pub.view.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 //TODO AFTER LOGIN TIMEOUT REDIRECT TO LOGIN
 class ListPub : Fragment() {
-
+    val database: AppDatabase by lazy { AppDatabase.getDatabase(requireContext())}
     private var _binding: FragmentListPubBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewmodel: BarsViewModel
@@ -54,8 +58,15 @@ class ListPub : Fragment() {
     ): View {
         _binding = FragmentListPubBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        GlobalScope.launch {
+//            BarsSingleton.bars =
+            fromDBtoSingleton(database.californiaParkDao().getAllPubs())
+            viewmodel.bars.postValue("Success")
+        }
+
         if (checkPermissions()) {
-            getGpsLocation()
+//            getGpsLocation()
         } else {
             Toast.makeText(context,"Please grant location permission!", Toast.LENGTH_LONG).show()
 
@@ -141,14 +152,19 @@ class ListPub : Fragment() {
 
         viewmodel.bars.observe(viewLifecycleOwner) {
             if (it != null && it.equals("Success")) {
+                if (viewmodel.coords.value?.lat != null && viewmodel.coords.value?.lon != null) {
+                    BarsSingleton.initDistance(viewmodel.coords.value?.lat!!, viewmodel.coords.value?.lon!!)
 
-                BarsSingleton.initDistance(viewmodel.coords.value?.lat!!, viewmodel.coords.value?.lon!!)
+                }
                 if (binding.ListPubRecyclerView.adapter != null){
                     val adapter = binding.ListPubRecyclerView.adapter!! as PubAdapter
                     adapter.update(BarsSingleton.bars!!)
                 } else{
                     binding.ListPubRecyclerView.adapter = PubAdapter(requireContext(), BarsSingleton.bars!!,findNavController())
                     binding.ListPubRecyclerView.setHasFixedSize(true)
+                }
+                GlobalScope.launch {
+                    database.californiaParkDao().insertAllPubsDB(fromSingletonToDB())
                 }
                 swiperefresh.isRefreshing = false
             }
@@ -184,6 +200,7 @@ class ListPub : Fragment() {
                 }
             } else {
                 Toast.makeText(context,"Please turn on your GPS!", Toast.LENGTH_SHORT).show()
+                swiperefresh.isRefreshing = false
             }
         }
     }

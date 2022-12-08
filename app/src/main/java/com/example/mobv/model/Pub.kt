@@ -2,6 +2,7 @@ package com.example.mobv.model
 
 import android.os.Parcelable
 import android.util.Log
+import androidx.room.Entity
 import com.example.mobv.api.FriendResponse
 import com.example.mobv.model.BarsSingleton.sortBy
 import com.google.android.gms.maps.model.LatLng
@@ -163,13 +164,13 @@ object BarsSingleton{
 
 @Parcelize
 data class Bar(
-    var bar_id: String? = null,
+    var bar_id: String,
     var bar_name: String? = null,
-    var lat: Number? = null,
-    var lon: Number? = null,
+    var lat: Double? = null,
+    var lon: Double? = null,
     var bar_type: String? = null,
-    var users: Number? = null,
-    var disFromLastPosition: Double? = null
+    var users: Int? = null,
+    var disFromLastPosition:    Double? = null
 ): Parcelable
 
 
