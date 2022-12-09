@@ -1,13 +1,11 @@
 package com.example.mobv.database
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import com.example.mobv.model.Bar
 import com.example.mobv.model.BarsSingleton
-import com.example.mobv.model.PubsSingleton.pubs
 import com.example.sqlbasics.PubDB
 
-    fun fromDBtoSingleton(pubs: List<PubDB>){
+fun fromDBtoSingleton(pubs: List<PubDB>){
         val bars = mutableListOf<Bar>()
         pubs.map{
             bars += it.toBar()

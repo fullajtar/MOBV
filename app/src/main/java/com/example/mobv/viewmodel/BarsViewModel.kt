@@ -1,14 +1,11 @@
 package com.example.mobv.viewmodel
 //source: https://github.com/marosc/mobv2022
 
-import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.mobv.DataRepository
-import com.example.mobv.model.Bar
-import com.example.mobv.model.BarsSingleton
-import com.example.mobv.model.BarsSingleton.bars
 import com.example.mobv.model.Coords
-import com.example.mobv.model.PubsSingleton
 import kotlinx.coroutines.launch
 
 class BarsViewModel(private val repository: DataRepository): ViewModel() {

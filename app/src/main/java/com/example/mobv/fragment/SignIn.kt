@@ -16,9 +16,6 @@ import com.example.mobv.helper.HashPassword.hashPassword
 import com.example.mobv.helper.Injection
 import com.example.mobv.helper.PreferenceData
 import com.example.mobv.viewmodel.AuthViewModel
-import java.security.MessageDigest
-import java.security.NoSuchAlgorithmException
-import kotlin.experimental.and
 
 class SignIn : Fragment() {
     private var _binding: FragmentSignInBinding? = null

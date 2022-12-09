@@ -13,11 +13,6 @@ import com.example.mobv.R
 import com.example.mobv.api.FriendResponse
 import com.example.mobv.fragment.FriendListDirections
 import com.example.mobv.model.Bar
-import com.example.mobv.model.Pub
-import com.example.mobv.viewmodel.FriendViewModel
-import kotlinx.android.synthetic.main.fragment_friend_list.view.*
-import kotlinx.android.synthetic.main.list_item_friend.view.*
-
 
 
 class FriendAdapter(

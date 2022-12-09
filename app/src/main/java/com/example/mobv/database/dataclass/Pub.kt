@@ -2,16 +2,10 @@ package com.example.mobv.model
 
 import android.os.Parcelable
 import android.util.Log
-import androidx.room.Entity
 import com.example.mobv.api.FriendResponse
-import com.example.mobv.model.BarsSingleton.sortBy
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.SphericalUtil
 import kotlinx.android.parcel.Parcelize
-
-object PubsSingleton{
-    lateinit var pubs: Pubs
-}
 
 data class Pubs (
     var elements: MutableList<Pub>? = null,

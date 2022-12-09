@@ -16,10 +16,7 @@
 package com.example.sqlbasics
 
 import android.content.Context
-import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.mobv.model.Bar
-import java.util.concurrent.Flow
 
 @Dao
 interface CaliforniaParkDao {

@@ -1,11 +1,10 @@
 package com.example.mobv.viewmodel
 
 import android.content.Context
-import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.mobv.DataRepository
-import com.example.mobv.api.FriendResponse
-import com.example.mobv.model.BarsSingleton.bars
 import kotlinx.coroutines.launch
 
 class FriendViewModel(private val repository: DataRepository): ViewModel() {

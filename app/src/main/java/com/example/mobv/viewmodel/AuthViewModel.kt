@@ -5,12 +5,11 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
-import android.util.Log
 import android.widget.Toast
-import androidx.lifecycle.*
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.mobv.DataRepository
-import com.example.mobv.api.BodySignUp
-import com.example.mobv.api.PubsApi
 import com.example.mobv.api.UserResponse
 import kotlinx.coroutines.launch
 

@@ -113,12 +113,6 @@ class ListPub : Fragment() {
             }
         }
 
-        binding.listPubButtonAdd.setOnClickListener{
-            findNavController().navigate(
-                ListPubDirections.actionListPubToNewPub()
-            )
-        }
-
         binding.listPubButtonSignOut.setOnClickListener{
             PreferenceData.getInstance().clearData(requireContext())
             findNavController().navigate(
@@ -139,7 +133,12 @@ class ListPub : Fragment() {
         }
 
         swiperefresh.setOnRefreshListener {
-            getGpsLocation()
+            if (checkPermissions()) {
+                getGpsLocation()
+            } else {
+                Toast.makeText(context,"Please grant location permission!", Toast.LENGTH_LONG).show()
+                swiperefresh.isRefreshing = false
+            }
         }
 
         viewmodel.coords.observe(viewLifecycleOwner){

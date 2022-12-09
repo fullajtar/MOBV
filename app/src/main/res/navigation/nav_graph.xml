@@ -18,9 +18,6 @@
             android:id="@+id/action_listPub_to_listPub"
             app:destination="@id/listPub" />
         <action
-            android:id="@+id/action_listPub_to_newPub"
-            app:destination="@id/newPub" />
-        <action
             android:id="@+id/action_listPub_to_signIn"
             app:destination="@id/signIn" />
         <action
@@ -44,20 +41,6 @@
             app:destination="@id/listPub" />
     </fragment>
 
-    <fragment
-        android:id="@+id/newPub"
-        android:name="com.example.mobv.fragment.NewPub"
-        android:label="fragment_new_pub"
-        tools:layout="@layout/fragment_new_pub" >
-        <action
-            android:id="@+id/action_newPub_to_listPub"
-            app:destination="@id/listPub" />
-    </fragment>
-    <fragment
-        android:id="@+id/game"
-        android:name="com.example.mobv.fragment.Game"
-        android:label="Game"
-        tools:layout="@layout/fragment_game"/>
     <fragment
         android:id="@+id/signUp"
         android:name="com.example.mobv.fragment.SignUp"

@@ -2,24 +2,20 @@ package com.example.mobv.fragment
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.mobv.R
-import com.example.mobv.api.BodyGetAllPubs
-import com.example.mobv.databinding.FragmentSignInBinding
 import com.example.mobv.databinding.FragmentSignUpBinding
 import com.example.mobv.helper.HashPassword
 import com.example.mobv.helper.Injection
 import com.example.mobv.helper.PreferenceData
 import com.example.mobv.viewmodel.AuthViewModel
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class SignUp : Fragment() {
     private var _binding: FragmentSignUpBinding? = null

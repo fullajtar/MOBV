@@ -1,8 +1,6 @@
 package com.example.mobv.api
 
 import android.content.Context
-import com.example.mobv.BuildConfig
-import com.example.mobv.model.Bar
 import com.example.mobv.model.Pubs
 import okhttp3.OkHttpClient
 import retrofit2.Call
