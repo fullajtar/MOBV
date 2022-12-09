@@ -13,27 +13,43 @@
         android:layout_height="match_parent"
         tools:context=".fragment.ListPub">
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Visited Bars"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:layout_alignParentTop="true"
+            />
+
         <Button
             android:id="@+id/listPub_buttonSort"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sort: Name"
             android:layout_marginStart="3dp"
-            android:layout_marginEnd="3dp"/>
+            android:layout_marginEnd="3dp"
+            android:layout_below="@id/textView"
+            />
         <Button
             android:id="@+id/listPub_buttonSortUsers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sort: Users"
             android:layout_toEndOf="@+id/listPub_buttonSort"
-            android:layout_marginEnd="3dp"/>
+            android:layout_marginEnd="3dp"
+            android:layout_below="@id/textView"
+            />
         <Button
             android:id="@+id/listPub_buttonSortDistance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sort: Distance"
             android:layout_toEndOf="@id/listPub_buttonSortUsers"
-            android:layout_marginEnd="3dp"/>
+            android:layout_marginEnd="3dp"
+            android:layout_below="@id/textView"
+            />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swiperefresh"

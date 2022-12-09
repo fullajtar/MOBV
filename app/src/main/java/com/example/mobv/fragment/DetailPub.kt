@@ -31,7 +31,6 @@ class DetailPub : Fragment() {
 
         val latitudeString = pub.lat.toString()
         val longitudeString = pub.lon.toString()
-
         // set the values to respective textViews
         binding.detailPubPubNameValue.text = pub.bar_name.toString()
         binding.detailPubWebsiteValue.text = pub.bar_type.toString()

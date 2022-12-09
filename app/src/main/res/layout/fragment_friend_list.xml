@@ -13,11 +13,22 @@
         android:layout_height="match_parent"
         tools:context=".fragment.FriendList">
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="People which allowed you to see their location"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:layout_alignParentTop="true"
+
+            />
+
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swiperefreshFriends"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
+            android:layout_below="@id/textView"
             android:layout_above="@id/friendList_buttonAdd">
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/FriendList_recyclerView"

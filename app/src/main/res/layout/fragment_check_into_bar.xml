@@ -13,6 +13,16 @@
         android:layout_height="match_parent"
         tools:context=".fragment.CheckIntoBar">
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Check into selected bar"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:layout_alignParentTop="true"
+            />
+
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/CheckIntoBar_animationView"
             android:layout_width="366dp"
@@ -27,8 +37,9 @@
             android:id="@+id/swiperefresh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@id/checkIntoBar_buttonCheckIn"
-            android:layout_margin="3dp">
+            android:layout_above="@id/CheckIntoBar_progressAnimation"
+            android:layout_margin="3dp"
+            android:layout_below="@id/textView">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/CheckIntoBar_recyclerView"
@@ -44,7 +55,7 @@
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/CheckIntoBar_progressAnimation"
             android:layout_width="366dp"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_above="@+id/checkIntoBar_buttonCheckIn"
             android:layout_centerHorizontal="true"
             app:lottie_progress="0.01"
